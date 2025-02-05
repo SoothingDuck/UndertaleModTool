@@ -1,0 +1,40 @@
+UNDERTALEMODCLI=../UndertaleModTool/UndertaleModCli/bin/Release/net8.0/publish/UndertaleModCli
+SCRIPTGMS2DIR=../UndertaleModTool/UndertaleModTool/Scripts/GMS2 Export
+DATAFILE=game.ios
+
+.PHONY: room sound
+
+all: font game_object path project room code sequence shader sound sprite tile
+
+font:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportFontDataGMS2.csx"
+
+game_object:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportGameObjectsGMS2.csx"
+
+path:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportPathDataGMS2.csx"
+
+project:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportProjectGMS2.csx"
+
+room:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportRoomsGMS2.csx"
+
+code:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportScriptCodeGMS2.csx"
+
+sequence:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSequencesGMS2.csx"
+
+shader:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportShaderGMS2.csx"
+
+sound:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSoundsGMS2.csx"
+
+sprite:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSpritesGMS2.csx"
+
+tile:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportTilesetsGMS2.csx"
