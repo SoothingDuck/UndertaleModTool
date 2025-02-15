@@ -290,34 +290,37 @@ void DumpRoom(UndertaleRoom room)
                             + ",},"
                     );
                 }
-                if (layer.AssetsData.Sequences.Count > 0)
+                if (layer.AssetsData.Sequences != null)
                 {
-                    writer.WriteLine("");
-                    foreach (var sequence in layer.AssetsData.Sequences)
+                    if (layer.AssetsData.Sequences.Count > 0)
                     {
-                        writer.WriteLine(
-                            "        {\"resourceType\":\"GMRSequenceGraphic\",\"resourceVersion\":\"1.0\",\"name\":\""
-                                + sequence.Name.Content
-                                + "\",\"animationSpeed\":1.0,\"colour\":"
-                                + sequence.Color
-                                + ",\"frozen\":false,\"headPosition\":0.0,\"ignore\":false,\"inheritedItemId\":null,\"inheritItemSettings\":false,\"rotation\":0.0,\"scaleX\":"
-                                + sequence.ScaleX.ToString("0.0")
-                                + ",\"scaleY\":"
-                                + sequence.ScaleY.ToString("0.0")
-                                + ",\"sequenceId\":{\"name\":\""
-                                + sequence.Sequence.Name.Content
-                                + "\",\"path\":\"sequences/"
-                                + sequence.Sequence.Name.Content
-                                + "/"
-                                + sequence.Sequence.Name.Content
-                                + ".yy\",},\"x\":"
-                                + sequence.X.ToString("0.0")
-                                + ",\"y\":"
-                                + sequence.Y.ToString("0.0")
-                                + ",},"
-                        );
+                        writer.WriteLine("");
+                        foreach (var sequence in layer.AssetsData.Sequences)
+                        {
+                            writer.WriteLine(
+                                "        {\"resourceType\":\"GMRSequenceGraphic\",\"resourceVersion\":\"1.0\",\"name\":\""
+                                    + sequence.Name.Content
+                                    + "\",\"animationSpeed\":1.0,\"colour\":"
+                                    + sequence.Color
+                                    + ",\"frozen\":false,\"headPosition\":0.0,\"ignore\":false,\"inheritedItemId\":null,\"inheritItemSettings\":false,\"rotation\":0.0,\"scaleX\":"
+                                    + sequence.ScaleX.ToString("0.0")
+                                    + ",\"scaleY\":"
+                                    + sequence.ScaleY.ToString("0.0")
+                                    + ",\"sequenceId\":{\"name\":\""
+                                    + sequence.Sequence.Name.Content
+                                    + "\",\"path\":\"sequences/"
+                                    + sequence.Sequence.Name.Content
+                                    + "/"
+                                    + sequence.Sequence.Name.Content
+                                    + ".yy\",},\"x\":"
+                                    + sequence.X.ToString("0.0")
+                                    + ",\"y\":"
+                                    + sequence.Y.ToString("0.0")
+                                    + ",},"
+                            );
+                        }
+                        writer.Write("      ");
                     }
-                    writer.Write("      ");
                 }
                 if (layer.AssetsData.NineSlices != null)
                 {
@@ -326,9 +329,12 @@ void DumpRoom(UndertaleRoom room)
                         throw new InvalidOperationException("No NineSlice Support yet...");
                     }
                 }
-                foreach (var particle in layer.AssetsData.ParticleSystems)
+                if (layer.AssetsData.ParticleSystems != null)
                 {
-                    throw new InvalidOperationException("No ParticleSystem Support yet...");
+                    foreach (var particle in layer.AssetsData.ParticleSystems)
+                    {
+                        throw new InvalidOperationException("No ParticleSystem Support yet...");
+                    }
                 }
                 if (layer.AssetsData.TextItems != null)
                 {
