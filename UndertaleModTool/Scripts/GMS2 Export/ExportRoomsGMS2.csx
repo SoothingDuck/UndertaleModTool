@@ -148,13 +148,14 @@ void WriteLayerProperties(StreamWriter writer, UndertaleRoom.Layer layer)
 
 void WriteLayerEffectProperties(StreamWriter writer, UndertaleRoom.Layer layer)
 {
-
     if (layer.EffectProperties != null)
     {
         if (layer.EffectProperties.Count > 0)
         {
             foreach (var property in layer.EffectProperties)
             {
+                writer.WriteLine(property);
+
                 writer.Write(
                     Environment.NewLine
                         + "        {\"name\":\""
@@ -240,12 +241,12 @@ void DumpRoom(UndertaleRoom room)
                         + (layer.EffectEnabled ? "true" : "false")
                         + ",\"effectType\":"
                         + (layer.EffectType is null ? "null" : layer.EffectType)
-                        + ",\"gridX\":5,\"gridY\":5,\"hierarchyFrozen\":false,\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"pathId\":null,\"properties\":[");
+                        + ",\"gridX\":5,\"gridY\":5,\"hierarchyFrozen\":false,\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"pathId\":null,\"properties\":["
+                );
 
                 WriteLayerEffectProperties(writer, layer);
 
-                writer.WriteLine("],\"userdefinedDepth\":false,\"visible\":true,},"
-                );
+                writer.WriteLine("],\"userdefinedDepth\":false,\"visible\":true,},");
             }
             else if (layer.LayerType == UndertaleRoom.LayerType.Assets)
             {
@@ -343,12 +344,12 @@ void DumpRoom(UndertaleRoom room)
                         + (layer.EffectEnabled ? "true" : "false")
                         + ",\"effectType\":"
                         + (layer.EffectType is null ? "null" : layer.EffectType)
-                        + ",\"gridX\":20,\"gridY\":20,\"hierarchyFrozen\":false,\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"properties\":[");
+                        + ",\"gridX\":20,\"gridY\":20,\"hierarchyFrozen\":false,\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"properties\":["
+                );
 
                 WriteLayerEffectProperties(writer, layer);
 
-                writer.WriteLine("],\"userdefinedDepth\":true,\"visible\":true,},"
-                );
+                writer.WriteLine("],\"userdefinedDepth\":true,\"visible\":true,},");
             }
             else if (layer.LayerType == UndertaleRoom.LayerType.Instances)
             {
@@ -407,8 +408,7 @@ void DumpRoom(UndertaleRoom room)
 
                 WriteLayerEffectProperties(writer, layer);
 
-                writer.WriteLine("],\"userdefinedDepth\":false,\"visible\":true,},"
-                );
+                writer.WriteLine("],\"userdefinedDepth\":false,\"visible\":true,},");
             }
             else if (layer.LayerType == UndertaleRoom.LayerType.Tiles)
             {
@@ -422,11 +422,13 @@ void DumpRoom(UndertaleRoom room)
                         + (layer.EffectEnabled ? "true" : "false")
                         + ",\"effectType\":"
                         + (layer.EffectType is null ? "null" : layer.EffectType)
-                        + ",\"gridX\":32,\"gridY\":32,\"hierarchyFrozen\":false,\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"properties\":[");
+                        + ",\"gridX\":32,\"gridY\":32,\"hierarchyFrozen\":false,\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"properties\":["
+                );
 
                 WriteLayerEffectProperties(writer, layer);
 
-                writer.WriteLine("],\"tiles\":{\"SerialiseHeight\":30,\"SerialiseWidth\":20,\"TileCompressedData\":["
+                writer.WriteLine(
+                    "],\"tiles\":{\"SerialiseHeight\":30,\"SerialiseWidth\":20,\"TileCompressedData\":["
                 );
 
                 // Algorithme compression
@@ -535,30 +537,43 @@ void DumpRoom(UndertaleRoom room)
                         + layer.HSpeed.ToString("0.0")
                         + ",\"htiled\":"
                         + (background.TiledHorizontally ? "true" : "false")
-                        + ",\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"properties\":[");
+                        + ",\"inheritLayerDepth\":false,\"inheritLayerSettings\":false,\"inheritSubLayers\":true,\"inheritVisibility\":true,\"layers\":[],\"properties\":["
+                );
 
                 WriteLayerEffectProperties(writer, layer);
+                writer.WriteLine("OK");
 
-                writer.WriteLine("],\"spriteId\":{\"name\":\""
-                      + background.Sprite.Name.Content
-                      + "\",\"path\":\"sprites/"
-                      + background.Sprite.Name.Content
-                      + "/"
-                      + background.Sprite.Name.Content
-                      + ".yy\",},\"stretch\":"
-                      + (background.Stretch ? "true" : "false")
-                      + ",\"userdefinedAnimFPS\":false,\"userdefinedDepth\":false,\"visible\":"
-                      + (background.Visible ? "true" : "false")
-                      + ",\"vspeed\":"
-                      + layer.VSpeed.ToString("0.0")
-                      + ",\"vtiled\":"
-                      + (background.TiledVertically ? "true" : "false")
-                      + ",\"x\":"
-                      + layer.XOffset
-                      + ",\"y\":"
-                      + layer.YOffset
-                      + ",},"
-              );
+                if (background.Sprite == null)
+                {
+                    writer.Write("],\"spriteId\":null");
+                }
+                else
+                {
+                    writer.Write(
+                        "],\"spriteId\":{\"name\":\""
+                            + background.Sprite.Name.Content
+                            + "\",\"path\":\"sprites/"
+                            + background.Sprite.Name.Content
+                            + "/"
+                            + background.Sprite.Name.Content
+                            + ".yy\",}"
+                    );
+                }
+                writer.WriteLine(
+                    ",\"stretch\":"
+                        + (background.Stretch ? "true" : "false")
+                        + ",\"userdefinedAnimFPS\":false,\"userdefinedDepth\":false,\"visible\":"
+                        + (background.Visible ? "true" : "false")
+                        + ",\"vspeed\":"
+                        + layer.VSpeed.ToString("0.0")
+                        + ",\"vtiled\":"
+                        + (background.TiledVertically ? "true" : "false")
+                        + ",\"x\":"
+                        + layer.XOffset
+                        + ",\"y\":"
+                        + layer.YOffset
+                        + ",},"
+                );
             }
             else if (layer.LayerType == UndertaleRoom.LayerType.Effect)
             {
