@@ -547,7 +547,6 @@ void DumpRoom(UndertaleRoom room)
                 );
 
                 WriteLayerEffectProperties(writer, layer);
-                writer.WriteLine("OK");
 
                 if (background.Sprite == null)
                 {
