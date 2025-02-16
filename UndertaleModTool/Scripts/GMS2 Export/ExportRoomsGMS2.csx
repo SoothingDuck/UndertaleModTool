@@ -154,8 +154,6 @@ void WriteLayerEffectProperties(StreamWriter writer, UndertaleRoom.Layer layer)
         {
             foreach (var property in layer.EffectProperties)
             {
-                writer.WriteLine(property);
-
                 writer.Write(
                     Environment.NewLine
                         + "        {\"name\":\""
@@ -475,33 +473,6 @@ void DumpRoom(UndertaleRoom room)
                     );
                 }
                 writer.Write("],");
-
-                /* writer.WriteLine(); */
-                /* writer.WriteLine(); */
-                /* writer.WriteLine( */
-                /*     "-5,-2147483648,-9,29,-10,-2147483648,1,25,-9,0,1,17,-9,-2147483648,1,25,-9,-2147483648,1,17," */
-                /* ); */
-                /* writer.WriteLine( */
-                /*     "-9,-2147483648,1,25,-9,-2147483648,1,17,-9,-2147483648,1,25,-9,-2147483648,1,17,-9,-2147483648,1,25," */
-                /* ); */
-                /* writer.WriteLine( */
-                /*     "-9,-2147483648,1,17,-9,-2147483648,1,25,-9,-2147483648,1,17,-9,-2147483648,1,25,-9,-2147483648,1,17," */
-                /* ); */
-                /* writer.WriteLine( */
-                /*     "-9,-2147483648,1,25,-9,-2147483648,1,17,-9,-2147483648,1,25,-9,-2147483648,1,17,-9,-2147483648,1,3," */
-                /* ); */
-                /* writer.Write("-9,21,1,2,-385,-2147483648,],"); */
-                /* writer.WriteLine(); */
-                /* writer.WriteLine(); */
-
-                /* foreach (var row in layer.TilesData.TileData) */
-                /* { */
-                /*     foreach (var tile in row) */
-                /*     { */
-                /*         writer.Write(tile + ","); */
-                /*     } */
-                /*     writer.WriteLine(); */
-                /* } */
 
                 String tileset_name = layer.TilesData.Background.Name.Content;
                 writer.WriteLine(
