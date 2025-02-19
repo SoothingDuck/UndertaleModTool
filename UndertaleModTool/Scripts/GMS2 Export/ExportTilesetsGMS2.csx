@@ -72,7 +72,221 @@ void DumpTileset(UndertaleBackground tileset)
         writer.WriteLine("  },");
         // TODO Create Sprite Tileset
 
-        // Un peu de travail avec Récupération du Script
+        string spriteFolder = GetFolder(FilePath) + "sprites" + Path.DirectorySeparatorChar;
+
+        using (
+            StreamWriter writer_sprite = new StreamWriter(
+                spriteFolder + "spr_"
+                + tileset.Name.Content
+                + Path.DirectorySeparatorChar
+                + "spr_"
+                + tileset.Name.Content
+                + ".yy"
+            )
+        )
+        {
+            // BEGIN : Extraction Images
+            string layer_directory =
+                texFolder + sprite.Name.Content + Path.DirectorySeparatorChar + "layers";
+            Directory.CreateDirectory(layer_directory);
+            for (int i = 0; i < sprite.Textures.Count; i++)
+            {
+                if (sprite.Textures[i]?.Texture != null)
+                {
+                    // Extraction de l'image à la base du répertoire
+                    worker.ExportAsPNG(
+                        sprite.Textures[i].Texture,
+                        texFolder
+                            + sprite.Name.Content
+                            + Path.DirectorySeparatorChar
+                            + sprite.Name.Content
+                            + "_"
+                            + i
+                            + ".png",
+                        null,
+                        padded
+                    ); // Include padding to make sprites look neat!
+
+                    // Création du répertoire dans "layers"
+                    Directory.CreateDirectory(
+                        texFolder
+                            + sprite.Name.Content
+                            + Path.DirectorySeparatorChar
+                            + "layers"
+                            + Path.DirectorySeparatorChar
+                            + sprite.Name.Content
+                            + "_"
+                            + i
+                    );
+
+                    // Extraction de l'image "layer"
+                    worker.ExportAsPNG(
+                        sprite.Textures[i].Texture,
+                        texFolder
+                            + sprite.Name.Content
+                            + Path.DirectorySeparatorChar
+                            + "layers"
+                            + Path.DirectorySeparatorChar
+                            + sprite.Name.Content
+                            + "_"
+                            + i
+                            + Path.DirectorySeparatorChar
+                            + sprite.Name.Content
+                            + "_"
+                            + "layer"
+                            + ".png",
+                        null,
+                        padded
+                    ); // Include padding to make sprites look neat!
+                }
+            }
+            // END : Extraction Images
+
+            writer_sprite.WriteLine("{");
+            writer_sprite.WriteLine("  \"resourceType\": \"GMSprite\",");
+            writer_sprite.WriteLine("  \"resourceVersion\": \"1.0\",");
+            writer_sprite.WriteLine("  \"name\": \"" + sprite.Name.Content + "\",");
+            writer_sprite.WriteLine("  \"bbox_bottom\": " + sprite.MarginBottom + ",");
+            writer_sprite.WriteLine("  \"bbox_left\": " + sprite.MarginLeft + ",");
+            writer_sprite.WriteLine("  \"bbox_right\": " + sprite.MarginRight + ",");
+            writer_sprite.WriteLine("  \"bbox_top\": " + sprite.MarginTop + ",");
+            writer_sprite.WriteLine("  \"bboxMode\": " + sprite.BBoxMode + ",");
+            if (sprite.SepMasks == UndertaleSprite.SepMaskType.Precise)
+            {
+                writer_sprite.WriteLine("  \"collisionKind\": 4,");
+            }
+            else if (sprite.SepMasks == UndertaleSprite.SepMaskType.AxisAlignedRect)
+            {
+                writer_sprite.WriteLine("  \"collisionKind\": 1,");
+            }
+            else if (sprite.SepMasks == UndertaleSprite.SepMaskType.RotatedRect)
+            {
+                writer_sprite.WriteLine("  \"collisionKind\": 5,");
+            }
+            else
+            {
+                writer_sprite.WriteLine("  \"collisionKind\": 0,");
+            }
+            writer_sprite.WriteLine("  \"collisionTolerance\": 0,");
+            writer_sprite.WriteLine("  \"DynamicTexturePage\": false,");
+            writer_sprite.WriteLine("  \"edgeFiltering\": false,");
+            writer_sprite.WriteLine("  \"For3D\": false,");
+            // BEGIN : frames
+            writer_sprite.WriteLine("  \"frames\": [");
+            for (int i = 0; i < sprite.Textures.Count; i++)
+            {
+                if (sprite.Textures[i]?.Texture != null)
+                {
+                    writer_sprite.WriteLine(
+                        "    {\"resourceType\":\"GMSpriteFrame\",\"resourceVersion\":\"1.1\",\"name\":\""
+                            + sprite.Name.Content
+                            + "_"
+                            + i
+                            + "\",},"
+                    );
+                }
+            }
+            writer_sprite.WriteLine("  ],");
+            // END : frames
+            writer_sprite.WriteLine("  \"gridX\": 0,");
+            writer_sprite.WriteLine("  \"gridY\": 0,");
+            writer_sprite.WriteLine("  \"height\": " + sprite.Height + ",");
+            writer_sprite.WriteLine("  \"HTile\": false,");
+            // BEGIN : layers
+            writer_sprite.WriteLine("  \"layers\": [");
+            writer_sprite.WriteLine(
+                "    {\"resourceType\":\"GMImageLayer\",\"resourceVersion\":\"1.0\",\"name\":\""
+                    + sprite.Name.Content
+                    + "_"
+                    + "layer"
+                    + "\",\"blendMode\":0,\"displayName\":\"default\",\"isLocked\":false,\"opacity\":100.0,\"visible\":true,},"
+            );
+            writer_sprite.WriteLine("  ],");
+            // END : layers
+            writer_sprite.WriteLine("  \"nineSlice\": null,");
+            writer_sprite.WriteLine("  \"origin\": 0,");
+            writer_sprite.WriteLine("  \"parent\": {");
+            writer_sprite.WriteLine("    \"name\": \"Sprites\",");
+            writer_sprite.WriteLine("    \"path\": \"folders/Sprites.yy\",");
+            writer_sprite.WriteLine("  },");
+            writer_sprite.WriteLine("  \"preMultiplyAlpha\": false,");
+            writer_sprite.WriteLine("  \"sequence\": {");
+            writer_sprite.WriteLine("    \"resourceType\": \"GMSequence\",");
+            writer_sprite.WriteLine("    \"resourceVersion\": \"1.4\",");
+            writer_sprite.WriteLine("    \"name\": \"" + sprite.Name.Content + "\",");
+            writer_sprite.WriteLine("    \"autoRecord\": true,");
+            writer_sprite.WriteLine("    \"backdropHeight\": 1080,");
+            writer_sprite.WriteLine("    \"backdropImageOpacity\": 0.5,");
+            writer_sprite.WriteLine("    \"backdropImagePath\": \"\",");
+            writer_sprite.WriteLine("    \"backdropWidth\": 1920,");
+            writer_sprite.WriteLine("    \"backdropXOffset\": 0.0,");
+            writer_sprite.WriteLine("    \"backdropYOffset\": 0.0,");
+            writer_sprite.WriteLine(
+                "    \"events\": {\"resourceType\":\"KeyframeStore<MessageEventKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":[],},"
+            );
+            writer_sprite.WriteLine("    \"eventStubScript\": null,");
+            writer_sprite.WriteLine("    \"eventToFunction\": {},");
+            writer_sprite.WriteLine("    \"length\": " + sprite.Textures.Count.ToString("0.0") + ",");
+            writer_sprite.WriteLine("    \"lockOrigin\": false,");
+            writer_sprite.WriteLine(
+                "    \"moments\": {\"resourceType\":\"KeyframeStore<MomentsEventKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":[],},"
+            );
+            writer_sprite.WriteLine("    \"playback\": 1,");
+            writer_sprite.WriteLine(
+                "    \"playbackSpeed\": " + sprite.GMS2PlaybackSpeed.ToString("0.0") + ","
+            );
+            writer_sprite.WriteLine(
+                "    \"playbackSpeedType\": " + (ushort)sprite.GMS2PlaybackSpeedType + ","
+            );
+            writer_sprite.WriteLine("    \"showBackdrop\": true,");
+            writer_sprite.WriteLine("    \"showBackdropImage\": false,");
+            writer_sprite.WriteLine("    \"timeUnits\": 1,");
+            // BEGIN : tracks
+            writer_sprite.WriteLine("    \"tracks\": [");
+            writer_sprite.WriteLine(
+                "      {\"resourceType\":\"GMSpriteFramesTrack\",\"resourceVersion\":\"1.0\",\"name\":\"frames\",\"builtinName\":0,\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<SpriteFrameKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+            );
+            for (int i = 0; i < sprite.Textures.Count; i++)
+            {
+                if (sprite.Textures[i]?.Texture != null)
+                {
+                    writer_sprite.WriteLine(
+                        "            {\"resourceType\":\"Keyframe<SpriteFrameKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{\"0\":{\"resourceType\":\"SpriteFrameKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\""
+                            + sprite.Name.Content
+                            + "_"
+                            + i
+                            + "\",\"path\":\"sprites/"
+                            + sprite.Name.Content
+                            + "/"
+                            + sprite.Name.Content
+                            + ".yy\",},},},\"Disabled\":false,\"IsCreationKey\":false,\"Key\":"
+                            + i.ToString("0.0")
+                            + ",\"Length\":1.0,\"Stretch\":false,},"
+                    );
+                }
+            }
+            writer_sprite.WriteLine(
+                "      ],},\"modifiers\":[],\"spriteId\":null,\"trackColour\":0,\"tracks\":[],\"traits\":0,},"
+            );
+            writer_sprite.WriteLine("    ],");
+            // END : tracks
+            writer_sprite.WriteLine("    \"visibleRange\": null,");
+            writer_sprite.WriteLine("    \"volume\": 1.0,");
+            writer_sprite.WriteLine("    \"xorigin\": " + sprite.OriginX + ",");
+            writer_sprite.WriteLine("    \"yorigin\": " + sprite.OriginY + ",");
+            writer_sprite.WriteLine("  },");
+            writer_sprite.WriteLine("  \"swatchColours\": null,");
+            writer_sprite.WriteLine("  \"swfPrecision\": 2.525,");
+            writer_sprite.WriteLine("  \"textureGroupId\": {");
+            writer_sprite.WriteLine("    \"name\": \"Default\",");
+            writer_sprite.WriteLine("    \"path\": \"texturegroups/Default\",");
+            writer_sprite.WriteLine("  },");
+            writer_sprite.WriteLine("  \"type\": 0,");
+            writer_sprite.WriteLine("  \"VTile\": false,");
+            writer_sprite.WriteLine("  \"width\": " + sprite.Width + ",");
+            writer_sprite.Write("}");
+
+        }
 
         // END Create Sprite Tileset
         writer.WriteLine("  \"spriteId\": {");
