@@ -200,7 +200,7 @@ void DumpTileset(UndertaleBackground tileset)
                     + ",\"Length\":1.0,\"Stretch\":false,},"
             );
             writer_sprite.WriteLine(
-                "      ],},\"modifiers\":[],\"spriteId\":null,\"trackColour\":0,\"tracks\":[],\"traits\":0,},"
+                "          ],},\"modifiers\":[],\"spriteId\":null,\"trackColour\":0,\"tracks\":[],\"traits\":0,},"
             );
             writer_sprite.WriteLine("    ],");
             // END : tracks
