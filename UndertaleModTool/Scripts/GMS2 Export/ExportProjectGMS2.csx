@@ -493,7 +493,7 @@ using (
         "    {\"resourceType\":\"GMTextureGroup\",\"resourceVersion\":\"1.3\",\"name\":\"Default\",\"autocrop\":true,\"border\":2,\"compressFormat\":\"bz2\",\"directory\":\"\",\"groupParent\":null,\"isScaled\":true,\"loadType\":\"default\",\"mipsToGenerate\":0,\"targets\":-1,},"
     );
     writer.WriteLine("  ],");
-    writer.WriteLine("}");
+    writer.Write("}");
 }
 
 // Export Project Resource Order
@@ -552,7 +552,7 @@ using (
         "    {\"name\":\"obj_banner_pause\",\"order\":1,\"path\":\"objects/obj_banner_pause/obj_banner_pause.yy\",},"
     );
     writer.WriteLine("  ],");
-    writer.WriteLine("}");
+    writer.Write("}");
 }
 
 ScriptMessage("Export Complete.\n\nLocation: " + rootFolder);
