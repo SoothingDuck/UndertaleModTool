@@ -91,13 +91,16 @@ using (
     writer.WriteLine("    {\"id\":{\"name\":\"obj_no_valid_matches_title\",\"path\":\"objects/obj_no_valid_matches_title/obj_no_valid_matches_title.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_powerup_spatula\",\"path\":\"sounds/snd_powerup_spatula/snd_powerup_spatula.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_button_resume\",\"path\":\"objects/obj_button_resume/obj_button_resume.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"fnt_big_text\",\"path\":\"fonts/fnt_big_text/fnt_big_text.yy\",},},");
+    for (int i = 0; i < Data.Fonts.Count; i++)
+    {
+        UndertaleFont font = Data.Fonts[i];
+        writer.WriteLine("    {\"id\":{\"name\":\"" + font.Name.Content + "\",\"path\":\"fonts/" + font.Name.Content + "/" + font.Name.Content + ".yy\",},},");
+    }
     writer.WriteLine("    {\"id\":{\"name\":\"obj_menu_button_quit\",\"path\":\"objects/obj_menu_button_quit/obj_menu_button_quit.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_game_over_button_next\",\"path\":\"objects/obj_game_over_button_next/obj_game_over_button_next.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_hud_star\",\"path\":\"sprites/spr_hud_star/spr_hud_star.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_game_over_title_win\",\"path\":\"objects/obj_game_over_title_win/obj_game_over_title_win.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_powerup_coffee_pour\",\"path\":\"sounds/snd_powerup_coffee_pour/snd_powerup_coffee_pour.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"fnt_small_text\",\"path\":\"fonts/fnt_small_text/fnt_small_text.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"tileset_board\",\"path\":\"tilesets/tileset_board/tileset_board.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_score\",\"path\":\"objects/obj_score/obj_score.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_game_over_next\",\"path\":\"sprites/spr_game_over_next/spr_game_over_next.yy\",},},");
@@ -137,7 +140,6 @@ using (
     writer.WriteLine("    {\"id\":{\"name\":\"obj_button_pause\",\"path\":\"objects/obj_button_pause/obj_button_pause.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_effect_star_particle\",\"path\":\"objects/obj_effect_star_particle/obj_effect_star_particle.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_objectives_horizontal\",\"path\":\"objects/obj_objectives_horizontal/obj_objectives_horizontal.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"fnt_medium_text\",\"path\":\"fonts/fnt_medium_text/fnt_medium_text.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"rm_level_3\",\"path\":\"rooms/rm_level_3/rm_level_3.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_score_bar_empty\",\"path\":\"sprites/spr_score_bar_empty/spr_score_bar_empty.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_donut_land\",\"path\":\"sounds/snd_donut_land/snd_donut_land.yy\",},},");
@@ -156,7 +158,6 @@ using (
     writer.WriteLine("    {\"id\":{\"name\":\"spr_decal\",\"path\":\"sprites/spr_decal/spr_decal.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_matching_piece\",\"path\":\"objects/obj_matching_piece/obj_matching_piece.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"seq_game_over_lose\",\"path\":\"sequences/seq_game_over_lose/seq_game_over_lose.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"fnt_score\",\"path\":\"fonts/fnt_score/fnt_score.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_game_over_window\",\"path\":\"sprites/spr_game_over_window/spr_game_over_window.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"seq_game_over_win_level\",\"path\":\"sequences/seq_game_over_win_level/seq_game_over_win_level.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_powerup_icing\",\"path\":\"sounds/snd_powerup_icing/snd_powerup_icing.yy\",},},");
@@ -168,7 +169,6 @@ using (
     writer.WriteLine("    {\"id\":{\"name\":\"obj_playfield_parent\",\"path\":\"objects/obj_playfield_parent/obj_playfield_parent.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_banner_paused\",\"path\":\"sprites/spr_banner_paused/spr_banner_paused.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"obj_button_audio\",\"path\":\"objects/obj_button_audio/obj_button_audio.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"fnt_main\",\"path\":\"fonts/fnt_main/fnt_main.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_ui_close\",\"path\":\"sounds/snd_ui_close/snd_ui_close.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_music_game\",\"path\":\"sounds/snd_music_game/snd_music_game.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_music_menu\",\"path\":\"sounds/snd_music_menu/snd_music_menu.yy\",},},");
