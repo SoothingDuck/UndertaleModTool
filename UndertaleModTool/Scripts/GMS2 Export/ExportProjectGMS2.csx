@@ -116,14 +116,16 @@ using (
     writer.WriteLine("    {\"id\":{\"name\":\"Documentation\",\"path\":\"notes/Documentation/Documentation.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_score_background_horizontal\",\"path\":\"sprites/spr_score_background_horizontal/spr_score_background_horizontal.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_play_field_light\",\"path\":\"sprites/spr_play_field_light/spr_play_field_light.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"rm_level_3\",\"path\":\"rooms/rm_level_3/rm_level_3.yy\",},},");
+    for (int i = 0; i < Data.Rooms.Count; i++)
+    {
+        UndertaleRoom room = Data.Rooms[i];
+        writer.WriteLine("    {\"id\":{\"name\":\"" + room.Name.Content + "\",\"path\":\"rooms/" + room.Name.Content + "/" + room.Name.Content + ".yy\",},},");
+    }
     writer.WriteLine("    {\"id\":{\"name\":\"spr_score_bar_empty\",\"path\":\"sprites/spr_score_bar_empty/spr_score_bar_empty.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_donut_land\",\"path\":\"sounds/snd_donut_land/snd_donut_land.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"snd_powerup_sprinkles\",\"path\":\"sounds/snd_powerup_sprinkles/snd_powerup_sprinkles.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"rm_menu\",\"path\":\"rooms/rm_menu/rm_menu.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"seq_pause\",\"path\":\"sequences/seq_pause/seq_pause.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_button_mute\",\"path\":\"sprites/spr_button_mute/spr_button_mute.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"rm_level_2\",\"path\":\"rooms/rm_level_2/rm_level_2.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_button_next\",\"path\":\"sprites/spr_button_next/spr_button_next.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_objective_tokens\",\"path\":\"sprites/spr_objective_tokens/spr_objective_tokens.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"screen_resize\",\"path\":\"scripts/screen_resize/screen_resize.yy\",},},");
@@ -145,13 +147,13 @@ using (
     writer.WriteLine("    {\"id\":{\"name\":\"snd_music_menu\",\"path\":\"sounds/snd_music_menu/snd_music_menu.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_tick\",\"path\":\"sprites/spr_tick/spr_tick.yy\",},},");
     writer.WriteLine("    {\"id\":{\"name\":\"spr_button_pause\",\"path\":\"sprites/spr_button_pause/spr_button_pause.yy\",},},");
-    writer.WriteLine("    {\"id\":{\"name\":\"rm_level_1\",\"path\":\"rooms/rm_level_1/rm_level_1.yy\",},},");
     writer.WriteLine("  ],");
     writer.WriteLine("  \"RoomOrderNodes\": [");
-    writer.WriteLine("    {\"roomId\":{\"name\":\"rm_menu\",\"path\":\"rooms/rm_menu/rm_menu.yy\",},},");
-    writer.WriteLine("    {\"roomId\":{\"name\":\"rm_level_1\",\"path\":\"rooms/rm_level_1/rm_level_1.yy\",},},");
-    writer.WriteLine("    {\"roomId\":{\"name\":\"rm_level_2\",\"path\":\"rooms/rm_level_2/rm_level_2.yy\",},},");
-    writer.WriteLine("    {\"roomId\":{\"name\":\"rm_level_3\",\"path\":\"rooms/rm_level_3/rm_level_3.yy\",},},");
+    foreach (var resource in Data.GeneralInfo.RoomOrder)
+    {
+        UndertaleRoom room = resource.Resource;
+        writer.WriteLine("    {\"roomId\":{\"name\":\"" + room.Name.Content + "\",\"path\":\"rooms/" + room.Name.Content + "/" + room.Name.Content + ".yy\",},},");
+    }
     writer.WriteLine("  ],");
     writer.WriteLine("  \"templateType\": \"game\",");
     writer.WriteLine("  \"TextureGroups\": [");
