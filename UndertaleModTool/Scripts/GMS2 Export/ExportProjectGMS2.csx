@@ -37,10 +37,25 @@ using (
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Fonts\",\"folderPath\":\"folders/Fonts.yy\",},"
     );
     writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Notes\",\"folderPath\":\"folders/Notes.yy\",},"
+    );
+    writer.WriteLine(
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Objects\",\"folderPath\":\"folders/Objects.yy\",},"
     );
     writer.WriteLine(
-        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Notes\",\"folderPath\":\"folders/Notes.yy\",},"
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Board and Pieces\",\"folderPath\":\"folders/Objects/Board and Pieces.yy\",},"
+    );
+    writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Controllers\",\"folderPath\":\"folders/Objects/Controllers.yy\",},"
+    );
+    writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Effects\",\"folderPath\":\"folders/Objects/Effects.yy\",},"
+    );
+    writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"HUD\",\"folderPath\":\"folders/Objects/HUD.yy\",},"
+    );
+    writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Main Menu\",\"folderPath\":\"folders/Objects/Main Menu.yy\",},"
     );
     writer.WriteLine(
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Rooms\",\"folderPath\":\"folders/Rooms.yy\",},"
@@ -62,6 +77,15 @@ using (
     );
     writer.WriteLine(
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Sprites\",\"folderPath\":\"folders/Sprites.yy\",},"
+    );
+    writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"BackgroundsAndTiles\",\"folderPath\":\"folders/Sprites/BackgroundsAndTiles.yy\",},"
+    );
+    writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"HUD\",\"folderPath\":\"folders/Sprites/HUD.yy\",},"
+    );
+    writer.WriteLine(
+        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Pieces\",\"folderPath\":\"folders/Sprites/Pieces.yy\",},"
     );
     writer.WriteLine(
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Tile Sets\",\"folderPath\":\"folders/Tile Sets.yy\",},"
