@@ -127,16 +127,7 @@ using (
         "    {\"id\":{\"name\":\"snd_special_token_whoosh\",\"path\":\"sounds/snd_special_token_whoosh/snd_special_token_whoosh.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_matching_pieces\",\"path\":\"sprites/spr_matching_pieces/spr_matching_pieces.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"check_board_valid\",\"path\":\"scripts/check_board_valid/check_board_valid.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_moves_icon\",\"path\":\"sprites/spr_moves_icon/spr_moves_icon.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_score_background_vertical\",\"path\":\"sprites/spr_score_background_vertical/spr_score_background_vertical.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_powerup_coffee_drink\",\"path\":\"sounds/snd_powerup_coffee_drink/snd_powerup_coffee_drink.yy\",},},"
@@ -145,19 +136,10 @@ using (
         "    {\"id\":{\"name\":\"snd_special_token_bomb\",\"path\":\"sounds/snd_special_token_bomb/snd_special_token_bomb.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_hud_moves_bg\",\"path\":\"sprites/spr_hud_moves_bg/spr_hud_moves_bg.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_donut_pop\",\"path\":\"sounds/snd_donut_pop/snd_donut_pop.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"check_on_startup\",\"path\":\"scripts/check_on_startup/check_on_startup.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_banner_uhoh\",\"path\":\"sprites/spr_banner_uhoh/spr_banner_uhoh.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_banner\",\"path\":\"sprites/spr_banner/spr_banner.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_powerup_spatula\",\"path\":\"sounds/snd_powerup_spatula/snd_powerup_spatula.yy\",},},"
@@ -176,16 +158,10 @@ using (
         );
     }
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_hud_star\",\"path\":\"sprites/spr_hud_star/spr_hud_star.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_powerup_coffee_pour\",\"path\":\"sounds/snd_powerup_coffee_pour/snd_powerup_coffee_pour.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"tileset_board\",\"path\":\"tilesets/tileset_board/tileset_board.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_game_over_next\",\"path\":\"sprites/spr_game_over_next/spr_game_over_next.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"objective_solve\",\"path\":\"scripts/objective_solve/objective_solve.yy\",},},"
@@ -194,34 +170,16 @@ using (
         "    {\"id\":{\"name\":\"snd_match_big\",\"path\":\"sounds/snd_match_big/snd_match_big.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_objectives_background_vertical\",\"path\":\"sprites/spr_objectives_background_vertical/spr_objectives_background_vertical.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_game_win\",\"path\":\"sounds/snd_game_win/snd_game_win.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"seq_game_over_win_template\",\"path\":\"sequences/seq_game_over_win_template/seq_game_over_win_template.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_circle_red\",\"path\":\"sprites/spr_button_circle_red/spr_button_circle_red.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"text_pop_up\",\"path\":\"scripts/text_pop_up/text_pop_up.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_invalid_match\",\"path\":\"sounds/snd_invalid_match/snd_invalid_match.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_home\",\"path\":\"sprites/spr_button_home/spr_button_home.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_wide_red\",\"path\":\"sprites/spr_button_wide_red/spr_button_wide_red.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_effect_pieces\",\"path\":\"sprites/spr_effect_pieces/spr_effect_pieces.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_background\",\"path\":\"sprites/spr_background/spr_background.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_match_small\",\"path\":\"sounds/snd_match_small/snd_match_small.yy\",},},"
@@ -236,31 +194,13 @@ using (
         "    {\"id\":{\"name\":\"seq_no_valid_matches\",\"path\":\"sequences/seq_no_valid_matches/seq_no_valid_matches.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_tileset_board\",\"path\":\"sprites/spr_tileset_board/spr_tileset_board.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_template_complete\",\"path\":\"sprites/spr_template_complete/spr_template_complete.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_ui_click\",\"path\":\"sounds/snd_ui_click/snd_ui_click.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_banner_failed\",\"path\":\"sprites/spr_banner_failed/spr_banner_failed.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_star_award_in_game\",\"path\":\"sounds/snd_star_award_in_game/snd_star_award_in_game.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_retry\",\"path\":\"sprites/spr_button_retry/spr_button_retry.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"Documentation\",\"path\":\"notes/Documentation/Documentation.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_score_background_horizontal\",\"path\":\"sprites/spr_score_background_horizontal/spr_score_background_horizontal.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_play_field_light\",\"path\":\"sprites/spr_play_field_light/spr_play_field_light.yy\",},},"
     );
     for (int i = 0; i < Data.Rooms.Count; i++)
     {
@@ -276,9 +216,6 @@ using (
         );
     }
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_score_bar_empty\",\"path\":\"sprites/spr_score_bar_empty/spr_score_bar_empty.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_donut_land\",\"path\":\"sounds/snd_donut_land/snd_donut_land.yy\",},},"
     );
     writer.WriteLine(
@@ -288,34 +225,10 @@ using (
         "    {\"id\":{\"name\":\"seq_pause\",\"path\":\"sequences/seq_pause/seq_pause.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_mute\",\"path\":\"sprites/spr_button_mute/spr_button_mute.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_next\",\"path\":\"sprites/spr_button_next/spr_button_next.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_objective_tokens\",\"path\":\"sprites/spr_objective_tokens/spr_objective_tokens.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"screen_resize\",\"path\":\"scripts/screen_resize/screen_resize.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_wide_green\",\"path\":\"sprites/spr_button_wide_green/spr_button_wide_green.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_banner_complete\",\"path\":\"sprites/spr_banner_complete/spr_banner_complete.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_circle_green\",\"path\":\"sprites/spr_button_circle_green/spr_button_circle_green.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_decal\",\"path\":\"sprites/spr_decal/spr_decal.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"seq_game_over_lose\",\"path\":\"sequences/seq_game_over_lose/seq_game_over_lose.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_game_over_window\",\"path\":\"sprites/spr_game_over_window/spr_game_over_window.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"seq_game_over_win_level\",\"path\":\"sequences/seq_game_over_win_level/seq_game_over_win_level.yy\",},},"
@@ -327,16 +240,7 @@ using (
         "    {\"id\":{\"name\":\"snd_powerup_selection\",\"path\":\"sounds/snd_powerup_selection/snd_powerup_selection.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_objectives_background_horizontal\",\"path\":\"sprites/spr_objectives_background_horizontal/spr_objectives_background_horizontal.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_logo\",\"path\":\"sprites/spr_logo/spr_logo.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_piece_swap\",\"path\":\"sounds/snd_piece_swap/snd_piece_swap.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_banner_paused\",\"path\":\"sprites/spr_banner_paused/spr_banner_paused.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_ui_close\",\"path\":\"sounds/snd_ui_close/snd_ui_close.yy\",},},"
@@ -346,12 +250,6 @@ using (
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_music_menu\",\"path\":\"sounds/snd_music_menu/snd_music_menu.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_tick\",\"path\":\"sprites/spr_tick/spr_tick.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"spr_button_pause\",\"path\":\"sprites/spr_button_pause/spr_button_pause.yy\",},},"
     );
     writer.WriteLine("  ],");
     writer.WriteLine("  \"RoomOrderNodes\": [");
