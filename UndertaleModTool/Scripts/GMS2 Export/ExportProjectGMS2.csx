@@ -70,22 +70,7 @@ using (
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Sounds\",\"folderPath\":\"folders/Sounds.yy\",},"
     );
     writer.WriteLine(
-        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Music\",\"folderPath\":\"folders/Sounds/Music.yy\",},"
-    );
-    writer.WriteLine(
-        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"SFX\",\"folderPath\":\"folders/Sounds/SFX.yy\",},"
-    );
-    writer.WriteLine(
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Sprites\",\"folderPath\":\"folders/Sprites.yy\",},"
-    );
-    writer.WriteLine(
-        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"BackgroundsAndTiles\",\"folderPath\":\"folders/Sprites/BackgroundsAndTiles.yy\",},"
-    );
-    writer.WriteLine(
-        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"HUD\",\"folderPath\":\"folders/Sprites/HUD.yy\",},"
-    );
-    writer.WriteLine(
-        "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Pieces\",\"folderPath\":\"folders/Sprites/Pieces.yy\",},"
     );
     writer.WriteLine(
         "    {\"resourceType\":\"GMFolder\",\"resourceVersion\":\"1.0\",\"name\":\"Tile Sets\",\"folderPath\":\"folders/Tile Sets.yy\",},"
@@ -158,12 +143,6 @@ using (
                 + ".yy\",},},"
         );
     }
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_game_lose\",\"path\":\"sounds/snd_game_lose/snd_game_lose.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_special_token_whoosh\",\"path\":\"sounds/snd_special_token_whoosh/snd_special_token_whoosh.yy\",},},"
-    );
     // Scripts
     for (int i = 0; i < Data.Scripts.Count; i++)
     {
@@ -181,18 +160,21 @@ using (
             );
         }
     }
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_powerup_coffee_drink\",\"path\":\"sounds/snd_powerup_coffee_drink/snd_powerup_coffee_drink.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_special_token_bomb\",\"path\":\"sounds/snd_special_token_bomb/snd_special_token_bomb.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_donut_pop\",\"path\":\"sounds/snd_donut_pop/snd_donut_pop.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_powerup_spatula\",\"path\":\"sounds/snd_powerup_spatula/snd_powerup_spatula.yy\",},},"
-    );
+    // Sounds
+    for (int i = 0; i < Data.Sounds.Count; i++)
+    {
+        UndertaleSound sound = Data.Sounds[i];
+        writer.WriteLine(
+            "    {\"id\":{\"name\":\""
+                + sound.Name.Content
+                + "\",\"path\":\"sounds/"
+                + sound.Name.Content
+                + "/"
+                + sound.Name.Content
+                + ".yy\",},},"
+        );
+    }
+    // Fonts
     for (int i = 0; i < Data.Fonts.Count; i++)
     {
         UndertaleFont font = Data.Fonts[i];
@@ -207,37 +189,13 @@ using (
         );
     }
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_powerup_coffee_pour\",\"path\":\"sounds/snd_powerup_coffee_pour/snd_powerup_coffee_pour.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"tileset_board\",\"path\":\"tilesets/tileset_board/tileset_board.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_match_big\",\"path\":\"sounds/snd_match_big/snd_match_big.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_game_win\",\"path\":\"sounds/snd_game_win/snd_game_win.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"seq_game_over_win_template\",\"path\":\"sequences/seq_game_over_win_template/seq_game_over_win_template.yy\",},},"
     );
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_invalid_match\",\"path\":\"sounds/snd_invalid_match/snd_invalid_match.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_match_small\",\"path\":\"sounds/snd_match_small/snd_match_small.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_star_award_complete\",\"path\":\"sounds/snd_star_award_complete/snd_star_award_complete.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"seq_no_valid_matches\",\"path\":\"sequences/seq_no_valid_matches/seq_no_valid_matches.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_ui_click\",\"path\":\"sounds/snd_ui_click/snd_ui_click.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_star_award_in_game\",\"path\":\"sounds/snd_star_award_in_game/snd_star_award_in_game.yy\",},},"
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"Documentation\",\"path\":\"notes/Documentation/Documentation.yy\",},},"
@@ -256,12 +214,6 @@ using (
         );
     }
     writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_donut_land\",\"path\":\"sounds/snd_donut_land/snd_donut_land.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_powerup_sprinkles\",\"path\":\"sounds/snd_powerup_sprinkles/snd_powerup_sprinkles.yy\",},},"
-    );
-    writer.WriteLine(
         "    {\"id\":{\"name\":\"seq_pause\",\"path\":\"sequences/seq_pause/seq_pause.yy\",},},"
     );
     writer.WriteLine(
@@ -269,24 +221,6 @@ using (
     );
     writer.WriteLine(
         "    {\"id\":{\"name\":\"seq_game_over_win_level\",\"path\":\"sequences/seq_game_over_win_level/seq_game_over_win_level.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_powerup_icing\",\"path\":\"sounds/snd_powerup_icing/snd_powerup_icing.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_powerup_selection\",\"path\":\"sounds/snd_powerup_selection/snd_powerup_selection.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_piece_swap\",\"path\":\"sounds/snd_piece_swap/snd_piece_swap.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_ui_close\",\"path\":\"sounds/snd_ui_close/snd_ui_close.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_music_game\",\"path\":\"sounds/snd_music_game/snd_music_game.yy\",},},"
-    );
-    writer.WriteLine(
-        "    {\"id\":{\"name\":\"snd_music_menu\",\"path\":\"sounds/snd_music_menu/snd_music_menu.yy\",},},"
     );
     writer.WriteLine("  ],");
     writer.WriteLine("  \"RoomOrderNodes\": [");
