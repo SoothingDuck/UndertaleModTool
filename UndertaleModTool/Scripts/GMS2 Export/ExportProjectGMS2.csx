@@ -168,15 +168,18 @@ using (
     for (int i = 0; i < Data.Scripts.Count; i++)
     {
         UndertaleScript script = Data.Scripts[i];
-        writer.WriteLine(
-            "    {\"id\":{\"name\":\""
-                + script.Name.Content
-                + "\",\"path\":\"scripts/"
-                + script.Name.Content
-                + "/"
-                + script.Name.Content
-                + ".yy\",},},"
-        );
+        if (!(script.Name.Content.StartsWith("gml_")))
+        {
+            writer.WriteLine(
+                "    {\"id\":{\"name\":\""
+                    + script.Name.Content
+                    + "\",\"path\":\"scripts/"
+                    + script.Name.Content
+                    + "/"
+                    + script.Name.Content
+                    + ".yy\",},},"
+            );
+        }
     }
     writer.WriteLine(
         "    {\"id\":{\"name\":\"snd_powerup_coffee_drink\",\"path\":\"sounds/snd_powerup_coffee_drink/snd_powerup_coffee_drink.yy\",},},"
