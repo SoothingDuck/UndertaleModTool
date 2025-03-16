@@ -116,6 +116,7 @@ using (
     writer.WriteLine("    \"IDEVersion\": \"2023.11.1.129\",");
     writer.WriteLine("  },");
     writer.WriteLine("  \"resources\": [");
+    // Sprites
     for (int i = 0; i < Data.Sprites.Count; i++)
     {
         UndertaleSprite sprite = Data.Sprites[i];
@@ -126,6 +127,20 @@ using (
                 + sprite.Name.Content
                 + "/"
                 + sprite.Name.Content
+                + ".yy\",},},"
+        );
+    }
+    // Tilesets
+    for (int i = 0; i < Data.Backgrounds.Count; i++)
+    {
+        UndertaleBackground tileset = Data.Backgrounds[i];
+        writer.WriteLine(
+            "    {\"id\":{\"name\":\"spr_"
+                + tileset.Name.Content
+                + "\",\"path\":\"sprites/spr_"
+                + tileset.Name.Content
+                + "/spr_"
+                + tileset.Name.Content
                 + ".yy\",},},"
         );
     }
