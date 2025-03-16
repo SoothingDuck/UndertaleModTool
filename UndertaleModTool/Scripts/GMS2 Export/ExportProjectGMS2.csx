@@ -21,7 +21,7 @@ using (
     writer.WriteLine("{");
     writer.WriteLine("  \"resourceType\": \"GMProject\",");
     writer.WriteLine("  \"resourceVersion\": \"1.7\",");
-    writer.WriteLine("  \"name\": \"Match 3 Template\",");
+    writer.WriteLine("  \"name\": \"" + Data.GeneralInfo.Name.Content + "\",");
     writer.WriteLine("  \"AudioGroups\": [");
     writer.WriteLine(
         "    {\"resourceType\":\"GMAudioGroup\",\"resourceVersion\":\"1.3\",\"name\":\"audiogroup_default\",\"targets\":-1,},"
