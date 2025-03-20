@@ -397,7 +397,7 @@ public class GMImage
     /// </summary>
     /// <param name="compressedData">Compressed BZ2 data, excluding the header.</param>
     /// <param name="width">Width of the image, as provided in BZ2 + QOI header.</param>
-    /// <param name="height">Height of the image, as provideed in BZ2 + QOI header.</param>
+    /// <param name="height">Height of the image, as provided in BZ2 + QOI header.</param>
     /// <param name="uncompressedLength">Length of BZ2 data when fully uncompressed.</param>
     /// <exception cref="InvalidDataException">Invalid BZ2 + QOI data, or image is too large</exception>
     public static GMImage FromBz2Qoi(byte[] compressedData, int width, int height, int uncompressedLength)
@@ -649,7 +649,7 @@ public class GMImage
             case ImageFormat.Bz2Qoi:
                 {
                     // Encode image as QOI
-                    return new GMImage(ImageFormat.Qoi, Width, Height, QoiConverter.GetArrayFromImage(this, false));
+                    return new GMImage(ImageFormat.Qoi, Width, Height, QoiConverter.GetArrayFromImage(this));
                 }
             case ImageFormat.Qoi:
                 {
@@ -708,7 +708,7 @@ public class GMImage
             case ImageFormat.Png:
                 {
                     // Encode image as QOI, first
-                    byte[] data = QoiConverter.GetArrayFromImage(this, false);
+                    byte[] data = QoiConverter.GetArrayFromImage(this);
                     return CompressQoiData(Width, Height, data, sharedStream);
                 }
             case ImageFormat.Qoi:
