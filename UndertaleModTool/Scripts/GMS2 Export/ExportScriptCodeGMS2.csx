@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 EnsureDataLoaded();
 
-string codeFolder = GetFolder(FilePath) + "scripts" + Path.DirectorySeparatorChar;
-ThreadLocal<GlobalDecompileContext> DECOMPILE_CONTEXT = new ThreadLocal<GlobalDecompileContext>(
-    () => new GlobalDecompileContext(Data, false)
-);
+string codeFolder = Path.Combine(Path.GetDirectoryName(FilePath), "scripts");
 
+// Supprimer le dossier s’il existe déjà
 if (Directory.Exists(codeFolder))
 {
     Directory.Delete(codeFolder, true);
@@ -19,130 +18,73 @@ if (Directory.Exists(codeFolder))
 
 Directory.CreateDirectory(codeFolder);
 
-bool exportFromCache = false;
-if (GMLCacheEnabled && Data.GMLCache is not null)
-    exportFromCache = ScriptQuestion("Export from the cache?");
+GlobalDecompileContext globalDecompileContext = new(Data);
+Underanalyzer.Decompiler.IDecompileSettings decompilerSettings = Data.ToolInfo.DecompilerSettings;
 
-List<UndertaleScript> toDump;
-if (!exportFromCache)
-{
-    toDump = new();
-    foreach (UndertaleScript script in Data.Scripts)
-    {
-        //if (code.ParentEntry != null)
-        //    continue;
-        toDump.Add(script);
-    }
-}
+List<UndertaleCode> toDump = Data.Code.Where(c => c.ParentEntry is null).ToList();
 
-bool cacheGenerated = false;
-if (exportFromCache)
-{
-    cacheGenerated = await GenerateGMLCache(DECOMPILE_CONTEXT);
-    await StopProgressBarUpdater();
-}
-
-// Export asset
-using (StreamWriter writer = new StreamWriter(codeFolder + "asset_order.txt"))
-{
-    for (int i = 0; i < Data.Scripts.Count; i++)
-    {
-        UndertaleScript script = Data.Scripts[i];
-
-        if (!(script.Name.Content.StartsWith("gml_")))
-        {
-            writer.WriteLine(
-                "    {\"id\":{\"name\":\""
-                    + script.Name.Content
-                    + "\",\"path\":\"scripts/"
-                    + script.Name.Content
-                    + "/"
-                    + script.Name.Content
-                    + ".yy\",},},"
-            );
-        }
-    }
-}
-
-SetProgressBar(
-    null,
-    "Code Entries",
-    0,
-    exportFromCache ? Data.GMLCache.Count + Data.GMLCacheFailed.Count : toDump.Count
-);
+SetProgressBar(null, "Code Entries", 0, toDump.Count);
 StartProgressBarUpdater();
 
 await DumpCode();
 
 await StopProgressBarUpdater();
 HideProgressBar();
-
 ScriptMessage("Export Complete.\n\nLocation: " + codeFolder);
-
-string GetFolder(string path)
-{
-    return Path.GetDirectoryName(path) + Path.DirectorySeparatorChar;
-}
 
 async Task DumpCode()
 {
-    // if (Data.KnownSubFunctions is null) //if we run script before opening any code
-
-    //     Decompiler.BuildSubFunctionCache(Data);
-
     await Task.Run(() => Parallel.ForEach(toDump, DumpCode));
 }
 
-void DumpCode(UndertaleScript script)
+void DumpCode(UndertaleCode code)
 {
-    if (script.Code is not null)
+    if (code is not null)
     {
-        if (!(script.Name.Content.StartsWith("gml_")))
+        if (code.Name.Content.StartsWith("gml_GlobalScript"))
         {
-            // SetProgressBar(null, "Code Entries : " + script.Name.Content, 0, 1);
-            // Extraction .gml
-            Directory.CreateDirectory(Path.Combine(codeFolder, script.Name.Content));
-            string path = Path.Combine(
-                codeFolder,
-                script.Name.Content,
-                script.Name.Content + ".gml"
-            );
+            string strippedName = code.Name.Content.Substring("gml_GlobalScript_".Length);
+            string path = Path.Combine(codeFolder, strippedName);
+            Directory.CreateDirectory(path);
             try
             {
+                // Export .gml
                 File.WriteAllText(
-                    path,
+                    Path.Combine(path, strippedName + ".gml"),
                     (
-                        script.Code != null
-                            ? Decompiler.Decompile(script.Code, DECOMPILE_CONTEXT.Value)
+                        code != null
+                            ? new Underanalyzer.Decompiler.DecompileContext(
+                                globalDecompileContext,
+                                code,
+                                decompilerSettings
+                            ).DecompileToString()
                             : ""
                     )
                 );
+                // Export .yy
+                using (
+                    StreamWriter writer = new StreamWriter(Path.Combine(path, strippedName + ".yy"))
+                )
+                {
+                    writer.WriteLine("{");
+                    writer.WriteLine("  \"resourceType\": \"GMScript\",");
+                    writer.WriteLine("  \"resourceVersion\": \"1.0\",");
+                    writer.WriteLine("  \"name\": \"" + strippedName + "\",");
+                    writer.WriteLine("  \"isCompatibility\": false,");
+                    writer.WriteLine("  \"isDnD\": false,");
+                    writer.WriteLine("  \"parent\": {");
+                    writer.WriteLine("    \"name\": \"Scripts\",");
+                    writer.WriteLine("    \"path\": \"folders/Scripts.yy\",");
+                    writer.WriteLine("  },");
+                    writer.Write("}");
+                }
             }
             catch (Exception e)
             {
                 File.WriteAllText(path, "/*\nDECOMPILER FAILED!\n\n" + e.ToString() + "\n*/");
             }
-
-            // Extraction .yy
-            using (
-                StreamWriter writer = new StreamWriter(
-                    codeFolder + script.Name.Content + Path.DirectorySeparatorChar + script.Name.Content + ".yy"
-                )
-            )
-            {
-                writer.WriteLine("{");
-                writer.WriteLine("  \"resourceType\": \"GMScript\",");
-                writer.WriteLine("  \"resourceVersion\": \"1.0\",");
-                writer.WriteLine("  \"name\": \"" + script.Name.Content + "\",");
-                writer.WriteLine("  \"isCompatibility\": false,");
-                writer.WriteLine("  \"isDnD\": false,");
-                writer.WriteLine("  \"parent\": {");
-                writer.WriteLine("    \"name\": \"Scripts\",");
-                writer.WriteLine("    \"path\": \"folders/Scripts.yy\",");
-                writer.WriteLine("  },");
-                writer.Write("}");
-            }
-            IncrementProgressParallel();
         }
     }
+
+    IncrementProgressParallel();
 }
