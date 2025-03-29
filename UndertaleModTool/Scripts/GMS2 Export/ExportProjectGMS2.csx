@@ -9,9 +9,6 @@ using UndertaleModLib.Util;
 EnsureDataLoaded();
 
 string rootFolder = Path.GetDirectoryName(FilePath) + Path.DirectorySeparatorChar;
-ThreadLocal<GlobalDecompileContext> DECOMPILE_CONTEXT = new ThreadLocal<GlobalDecompileContext>(
-    () => new GlobalDecompileContext(Data, false)
-);
 
 // Export Project yyp
 using (
