@@ -41,43 +41,54 @@ void DumpCode(UndertaleCode code)
 {
     if (code is not null)
     {
-        string strippedName = code.Name.Content.Substring("gml_GlobalScript_".Length);
-        string path = Path.Combine(codeFolder, strippedName);
-        Directory.CreateDirectory(path);
-        try
+        Console.Out.WriteLine(code.Name.Content);
+        if (!code.Name.Content.StartsWith("gml_Object_"))
         {
-            // Export .gml
-            File.WriteAllText(
-                Path.Combine(path, strippedName + ".gml"),
-                (
-                    code != null
-                        ? new Underanalyzer.Decompiler.DecompileContext(
-                            globalDecompileContext,
-                            code,
-                            decompilerSettings
-                        ).DecompileToString()
-                        : ""
-                )
-            );
-            // Export .yy
-            using (StreamWriter writer = new StreamWriter(Path.Combine(path, strippedName + ".yy")))
+            // string strippedName = code.Name.Content.Substring("gml_GlobalScript_".Length);
+            string strippedName = code.Name.Content;
+            strippedName = strippedName.Replace("gml_GlobalScript_", "");
+            strippedName = strippedName.Replace("gml_Script_", "");
+            Console.Out.WriteLine(strippedName);
+            //
+            string path = Path.Combine(codeFolder, strippedName);
+            Directory.CreateDirectory(path);
+            try
             {
-                writer.WriteLine("{");
-                writer.WriteLine("  \"resourceType\": \"GMScript\",");
-                writer.WriteLine("  \"resourceVersion\": \"1.0\",");
-                writer.WriteLine("  \"name\": \"" + strippedName + "\",");
-                writer.WriteLine("  \"isCompatibility\": false,");
-                writer.WriteLine("  \"isDnD\": false,");
-                writer.WriteLine("  \"parent\": {");
-                writer.WriteLine("    \"name\": \"Scripts\",");
-                writer.WriteLine("    \"path\": \"folders/Scripts.yy\",");
-                writer.WriteLine("  },");
-                writer.Write("}");
+                // Export .gml
+                File.WriteAllText(
+                    Path.Combine(path, strippedName + ".gml"),
+                    (
+                        code != null
+                            ? new Underanalyzer.Decompiler.DecompileContext(
+                                globalDecompileContext,
+                                code,
+                                decompilerSettings
+                            ).DecompileToString()
+                            : ""
+                    )
+                );
+                // Export .yy
+                using (
+                    StreamWriter writer = new StreamWriter(Path.Combine(path, strippedName + ".yy"))
+                )
+                {
+                    writer.WriteLine("{");
+                    writer.WriteLine("  \"resourceType\": \"GMScript\",");
+                    writer.WriteLine("  \"resourceVersion\": \"1.0\",");
+                    writer.WriteLine("  \"name\": \"" + strippedName + "\",");
+                    writer.WriteLine("  \"isCompatibility\": false,");
+                    writer.WriteLine("  \"isDnD\": false,");
+                    writer.WriteLine("  \"parent\": {");
+                    writer.WriteLine("    \"name\": \"Scripts\",");
+                    writer.WriteLine("    \"path\": \"folders/Scripts.yy\",");
+                    writer.WriteLine("  },");
+                    writer.Write("}");
+                }
             }
-        }
-        catch (Exception e)
-        {
-            File.WriteAllText(path, "/*\nDECOMPILER FAILED!\n\n" + e.ToString() + "\n*/");
+            catch (Exception e)
+            {
+                File.WriteAllText(path, "/*\nDECOMPILER FAILED!\n\n" + e.ToString() + "\n*/");
+            }
         }
     }
 
