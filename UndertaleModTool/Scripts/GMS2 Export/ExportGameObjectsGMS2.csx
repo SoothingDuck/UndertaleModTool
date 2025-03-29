@@ -8,45 +8,19 @@ using System.Threading.Tasks;
 EnsureDataLoaded();
 
 string objectsFolder = GetFolder(FilePath) + "objects" + Path.DirectorySeparatorChar;
-ThreadLocal<GlobalDecompileContext> DECOMPILE_CONTEXT = new ThreadLocal<GlobalDecompileContext>(
-    () => new GlobalDecompileContext(Data, false)
-);
-
-// if (Directory.Exists(objectsFolder))
-// {
-//     ScriptError("An object export already exists. Please remove it.", "Error");
-//     return;
-// }
-
 Directory.CreateDirectory(objectsFolder);
 
-bool exportFromCache = false;
-if (GMLCacheEnabled && Data.GMLCache is not null)
-    exportFromCache = ScriptQuestion("Export from the cache?");
+GlobalDecompileContext globalDecompileContext = new(Data);
+Underanalyzer.Decompiler.IDecompileSettings decompilerSettings = Data.ToolInfo.DecompilerSettings;
 
 List<UndertaleGameObject> toDump;
-if (!exportFromCache)
+toDump = new();
+foreach (UndertaleGameObject game_object in Data.GameObjects)
 {
-    toDump = new();
-    foreach (UndertaleGameObject game_object in Data.GameObjects)
-    {
-        toDump.Add(game_object);
-    }
+    toDump.Add(game_object);
 }
 
-bool cacheGenerated = false;
-if (exportFromCache)
-{
-    cacheGenerated = await GenerateGMLCache(DECOMPILE_CONTEXT);
-    await StopProgressBarUpdater();
-}
-
-SetProgressBar(
-    null,
-    "Object Entries",
-    0,
-    exportFromCache ? Data.GMLCache.Count + Data.GMLCacheFailed.Count : toDump.Count
-);
+SetProgressBar(null, "Object Entries", 0, toDump.Count);
 StartProgressBarUpdater();
 
 await DumpCode();
@@ -93,7 +67,11 @@ void DumpGameObject(UndertaleGameObject game_object)
 
     using (
         StreamWriter writer = new StreamWriter(
-            objectsFolder + game_object.Name.Content + Path.DirectorySeparatorChar + game_object.Name.Content + ".yy"
+            objectsFolder
+                + game_object.Name.Content
+                + Path.DirectorySeparatorChar
+                + game_object.Name.Content
+                + ".yy"
         )
     )
     {
@@ -175,10 +153,11 @@ void DumpGameObject(UndertaleGameObject game_object)
                                 path,
                                 (
                                     action.CodeId != null
-                                        ? Decompiler.Decompile(
+                                        ? new Underanalyzer.Decompiler.DecompileContext(
+                                            globalDecompileContext,
                                             action.CodeId,
-                                            DECOMPILE_CONTEXT.Value
-                                        )
+                                            decompilerSettings
+                                        ).DecompileToString()
                                         : ""
                                 )
                             );
