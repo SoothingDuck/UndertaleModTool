@@ -41,48 +41,43 @@ void DumpCode(UndertaleCode code)
 {
     if (code is not null)
     {
-        if (code.Name.Content.StartsWith("gml_GlobalScript"))
+        string strippedName = code.Name.Content.Substring("gml_GlobalScript_".Length);
+        string path = Path.Combine(codeFolder, strippedName);
+        Directory.CreateDirectory(path);
+        try
         {
-            string strippedName = code.Name.Content.Substring("gml_GlobalScript_".Length);
-            string path = Path.Combine(codeFolder, strippedName);
-            Directory.CreateDirectory(path);
-            try
-            {
-                // Export .gml
-                File.WriteAllText(
-                    Path.Combine(path, strippedName + ".gml"),
-                    (
-                        code != null
-                            ? new Underanalyzer.Decompiler.DecompileContext(
-                                globalDecompileContext,
-                                code,
-                                decompilerSettings
-                            ).DecompileToString()
-                            : ""
-                    )
-                );
-                // Export .yy
-                using (
-                    StreamWriter writer = new StreamWriter(Path.Combine(path, strippedName + ".yy"))
+            // Export .gml
+            File.WriteAllText(
+                Path.Combine(path, strippedName + ".gml"),
+                (
+                    code != null
+                        ? new Underanalyzer.Decompiler.DecompileContext(
+                            globalDecompileContext,
+                            code,
+                            decompilerSettings
+                        ).DecompileToString()
+                        : ""
                 )
-                {
-                    writer.WriteLine("{");
-                    writer.WriteLine("  \"resourceType\": \"GMScript\",");
-                    writer.WriteLine("  \"resourceVersion\": \"1.0\",");
-                    writer.WriteLine("  \"name\": \"" + strippedName + "\",");
-                    writer.WriteLine("  \"isCompatibility\": false,");
-                    writer.WriteLine("  \"isDnD\": false,");
-                    writer.WriteLine("  \"parent\": {");
-                    writer.WriteLine("    \"name\": \"Scripts\",");
-                    writer.WriteLine("    \"path\": \"folders/Scripts.yy\",");
-                    writer.WriteLine("  },");
-                    writer.Write("}");
-                }
-            }
-            catch (Exception e)
+            );
+            // Export .yy
+            using (StreamWriter writer = new StreamWriter(Path.Combine(path, strippedName + ".yy")))
             {
-                File.WriteAllText(path, "/*\nDECOMPILER FAILED!\n\n" + e.ToString() + "\n*/");
+                writer.WriteLine("{");
+                writer.WriteLine("  \"resourceType\": \"GMScript\",");
+                writer.WriteLine("  \"resourceVersion\": \"1.0\",");
+                writer.WriteLine("  \"name\": \"" + strippedName + "\",");
+                writer.WriteLine("  \"isCompatibility\": false,");
+                writer.WriteLine("  \"isDnD\": false,");
+                writer.WriteLine("  \"parent\": {");
+                writer.WriteLine("    \"name\": \"Scripts\",");
+                writer.WriteLine("    \"path\": \"folders/Scripts.yy\",");
+                writer.WriteLine("  },");
+                writer.Write("}");
             }
+        }
+        catch (Exception e)
+        {
+            File.WriteAllText(path, "/*\nDECOMPILER FAILED!\n\n" + e.ToString() + "\n*/");
         }
     }
 
