@@ -15,12 +15,8 @@ customCulture.NumberFormat.NumberDecimalSeparator = ".";
 
 System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 
-//
-
 string sequencesFolder = GetFolder(FilePath) + "sequences" + Path.DirectorySeparatorChar;
-ThreadLocal<GlobalDecompileContext> DECOMPILE_CONTEXT = new ThreadLocal<GlobalDecompileContext>(
-    () => new GlobalDecompileContext(Data, false)
-);
+
 if (Directory.Exists(sequencesFolder))
 {
     Directory.Delete(sequencesFolder, true);
@@ -62,8 +58,8 @@ string GetFolder(string path)
 
 async Task DumpSequences()
 {
-    if (Data.KnownSubFunctions is null) //if we run script before opening any code
-        Decompiler.BuildSubFunctionCache(Data);
+    // if (Data.KnownSubFunctions is null) //if we run script before opening any code
+    //     Decompiler.BuildSubFunctionCache(Data);
 
     await Task.Run(() => Parallel.ForEach(toDump, DumpSequence));
 }
