@@ -42,7 +42,12 @@ void DumpCode(UndertaleCode code)
     if (code is not null)
     {
         Console.Out.WriteLine(code.Name.Content);
-        if (!code.Name.Content.StartsWith("gml_Object_"))
+        if (
+            !(
+                code.Name.Content.StartsWith("gml_Object_")
+                || code.Name.Content.StartsWith("gml_Room_")
+            )
+        )
         {
             // string strippedName = code.Name.Content.Substring("gml_GlobalScript_".Length);
             string strippedName = code.Name.Content;
