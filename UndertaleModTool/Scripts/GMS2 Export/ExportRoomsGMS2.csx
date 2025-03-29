@@ -16,9 +16,10 @@ customCulture.NumberFormat.NumberDecimalSeparator = ".";
 System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 
 string roomsFolder = GetFolder(FilePath) + "rooms" + Path.DirectorySeparatorChar;
-ThreadLocal<GlobalDecompileContext> DECOMPILE_CONTEXT = new ThreadLocal<GlobalDecompileContext>(
-    () => new GlobalDecompileContext(Data, false)
-);
+
+GlobalDecompileContext globalDecompileContext = new(Data);
+Underanalyzer.Decompiler.IDecompileSettings decompilerSettings = Data.ToolInfo.DecompilerSettings;
+
 if (Directory.Exists(roomsFolder))
 {
     Directory.Delete(roomsFolder, true);
@@ -204,7 +205,12 @@ void DumpRoom(UndertaleRoom room)
                     + room.Name.Content
                     + Path.DirectorySeparatorChar
                     + "RoomCreationCode.gml",
-                Decompiler.Decompile(room.CreationCodeId, DECOMPILE_CONTEXT.Value)
+                // Decompiler.Decompile(room.CreationCodeId, DECOMPILE_CONTEXT.Value)
+                new Underanalyzer.Decompiler.DecompileContext(
+                    globalDecompileContext,
+                    room.CreationCodeId,
+                    decompilerSettings
+                ).DecompileToString()
             );
         }
         // End CreationCodeId
