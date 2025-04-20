@@ -1,0 +1,21 @@
+# Nom de l'exécutable
+EXEC = ../UndertaleModTool/UndertaleModCli/bin/Release/net8.0/UndertaleModCli.exe
+DATA = data.win
+
+# Arguments pour chaque cible
+GMS2_SCRIPT_PATH = ../UndertaleModTool/UndertaleModTool/Scripts/GMS2 Export
+
+# Cibles pour exécuter avec des arguments différents
+.PHONY: font path code
+
+font:
+	./$(EXEC) load $(DATA) -s "$(GMS2_SCRIPT_PATH)/ExportFontDataGMS2.csx"
+
+path:
+	./$(EXEC) load $(DATA) -s "$(GMS2_SCRIPT_PATH)/ExportPathDataGMS2.csx"
+
+code:
+	./$(EXEC) load $(DATA) -s "$(GMS2_SCRIPT_PATH)/ExportScriptCodeGMS2.csx"
+
+# Exécuter toutes les configurations à la suite
+all: font path code
