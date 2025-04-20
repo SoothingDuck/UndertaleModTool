@@ -12,6 +12,7 @@ font:
 
 game_object:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportGameObjectsGMS2.csx"
+	find objects -name "*.yy" -exec unix2dos {} \;
 
 path:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportPathDataGMS2.csx"
