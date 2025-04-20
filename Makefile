@@ -1,0 +1,2 @@
+all:
+	dotnet publish UndertaleModCli
