@@ -1,21 +1,46 @@
-# Nom de l'exécutable
-EXEC = ../UndertaleModTool/UndertaleModCli/bin/Release/net8.0/UndertaleModCli.exe
-DATA = data.win
+UNDERTALEMODCLI=../UndertaleModTool/UndertaleModCli/bin/Release/net8.0/publish/UndertaleModCli
+SCRIPTGMS2DIR=../UndertaleModTool/UndertaleModTool/Scripts/GMS2 Export
+DATAFILE=data.win
 
-# Arguments pour chaque cible
-GMS2_SCRIPT_PATH = ../UndertaleModTool/UndertaleModTool/Scripts/GMS2 Export
+.PHONY: font game_object path room code sequence shader sound sprite tile project
 
-# Cibles pour exécuter avec des arguments différents
-.PHONY: font path code
+all: font game_object path room code sequence shader sound sprite tile project
 
 font:
-	./$(EXEC) load $(DATA) -s "$(GMS2_SCRIPT_PATH)/ExportFontDataGMS2.csx"
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportFontDataGMS2.csx"
+	find fonts -name "*.yy" -exec unix2dos {} \;
+
+game_object:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportGameObjectsGMS2.csx"
 
 path:
-	./$(EXEC) load $(DATA) -s "$(GMS2_SCRIPT_PATH)/ExportPathDataGMS2.csx"
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportPathDataGMS2.csx"
+
+project:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportProjectGMS2.csx"
+	unix2dos *.yyp
+	unix2dos *.resource_order
+
+room:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportRoomsGMS2.csx"
 
 code:
-	./$(EXEC) load $(DATA) -s "$(GMS2_SCRIPT_PATH)/ExportScriptCodeGMS2.csx"
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportScriptCodeGMS2.csx"
+	find scripts -name "*.yy" -exec unix2dos {} \;
+	find scripts -name "*.gml" -exec unix2dos {} \;
 
-# Exécuter toutes les configurations à la suite
-all: font path code
+sequence:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSequencesGMS2.csx"
+
+shader:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportShaderGMS2.csx"
+
+sound:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSoundsGMS2.csx"
+	find sounds -name "*.yy" -exec unix2dos {} \;
+
+sprite:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSpritesGMS2.csx"
+
+tile:
+	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportTilesetsGMS2.csx"
