@@ -2,9 +2,9 @@ UNDERTALEMODCLI=../UndertaleModTool/UndertaleModCli/bin/Release/net8.0/publish/U
 SCRIPTGMS2DIR=../UndertaleModTool/UndertaleModTool/Scripts/GMS2 Export
 DATAFILE=data.win
 
-.PHONY: font game_object path room code sequence shader sound sprite tile project
+.PHONY: font game_object path room code shader sound sprite tile project
 
-all: font game_object path room code sequence shader sound sprite tile project
+all: font game_object path room code shader sound sprite tile project
 
 font:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportFontDataGMS2.csx"
