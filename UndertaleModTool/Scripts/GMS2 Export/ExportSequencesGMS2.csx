@@ -64,11 +64,7 @@ async Task DumpSequences()
     await Task.Run(() => Parallel.ForEach(toDump, DumpSequence));
 }
 
-void DumpTracks(
-    StreamWriter writer,
-    UndertaleModLib.UndertaleSimpleList<UndertaleSequence.Track> tracks,
-    int tabnum = 2
-)
+void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int tabnum = 2)
 {
     String mytab = new String('\t', tabnum);
 
@@ -94,11 +90,7 @@ void DumpTracks(
                     mytab + "],},\"modifiers\":[],\"trackColour\":4292102386,\"tracks\":["
                 );
                 // Tracks
-                DumpTracks(
-                    writer,
-                    new UndertaleSimpleList<UndertaleSequence.Track>(track.Tracks),
-                    tabnum + 1
-                );
+                DumpTracks(writer, track.Tracks, tabnum + 1);
                 writer.WriteLine(mytab + "],\"traits\":0,}");
                 break;
 
@@ -113,13 +105,14 @@ void DumpTracks(
                 writer.WriteLine(track.Tracks.Count); // 5
                 writer.WriteLine(
                     mytab
-                        + "{\"resourceType\":\"GMGraphicTrack\",\"resourceVersion\":\"1.0\",\"name\":\"spr_arc_long\",\"builtinName\":0,\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetSpriteKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                        + "{\"resourceType\":\"GMInstanceTrack\",\"resourceVersion\":\"1.0\",\"name\":\"spr_arc_long\",\"builtinName\":0,\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetSpriteKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
                 writer.WriteLine(
                     mytab + "],},\"modifiers\":[],\"trackColour\":4292102386,\"tracks\":["
                 );
                 // Tracks
+                DumpTracks(writer, track.Tracks, tabnum + 1);
                 writer.WriteLine(mytab + "],\"traits\":0,}");
                 break;
 
@@ -182,7 +175,7 @@ void DumpSequence(UndertaleSequence sequence)
         writer.WriteLine("  \"timeUnits\": 1,");
         writer.WriteLine("  \"tracks\": [");
 
-        DumpTracks(writer, sequence.Tracks);
+        DumpTracks(writer, new List<UndertaleSequence.Track>(sequence.Tracks));
 
         writer.WriteLine("  ],");
         writer.WriteLine("  \"visibleRange\": null,");
