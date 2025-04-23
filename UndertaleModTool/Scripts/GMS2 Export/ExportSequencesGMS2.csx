@@ -116,6 +116,50 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int t
                 writer.WriteLine(mytab + "],\"traits\":0,}");
                 break;
 
+            case "GMColourTrack":
+                writer.WriteLine(track.ModelName.Content); // GMGraphicTrack
+                writer.WriteLine(track.Name.Content); // spr_arc_long
+                writer.WriteLine(track.BuiltinName); // 0
+                writer.WriteLine(track.Traits); // None
+                writer.WriteLine(track.IsCreationTrack); // False
+                writer.WriteLine(track.Tags.Count); // 0
+                writer.WriteLine(track.OwnedResources.Count); // 0
+                writer.WriteLine(track.Tracks.Count); // 5
+                writer.WriteLine(
+                    mytab
+                        + "{\"resourceType\":\"GMColourTrack\",\"resourceVersion\":\"1.0\",\"name\":\"spr_arc_long\",\"builtinName\":0,\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetSpriteKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                );
+                // Keyframes
+                writer.WriteLine(
+                    mytab + "],},\"modifiers\":[],\"trackColour\":4292102386,\"tracks\":["
+                );
+                // Tracks
+                DumpTracks(writer, track.Tracks, tabnum + 1);
+                writer.WriteLine(mytab + "],\"traits\":0,}");
+                break;
+
+            case "GMRealTrack":
+                writer.WriteLine(track.ModelName.Content); // GMGraphicTrack
+                writer.WriteLine(track.Name.Content); // spr_arc_long
+                writer.WriteLine(track.BuiltinName); // 0
+                writer.WriteLine(track.Traits); // None
+                writer.WriteLine(track.IsCreationTrack); // False
+                writer.WriteLine(track.Tags.Count); // 0
+                writer.WriteLine(track.OwnedResources.Count); // 0
+                writer.WriteLine(track.Tracks.Count); // 5
+                writer.WriteLine(
+                    mytab
+                        + "{\"resourceType\":\"GMRealTrack\",\"resourceVersion\":\"1.0\",\"name\":\"spr_arc_long\",\"builtinName\":0,\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetSpriteKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                );
+                // Keyframes
+                writer.WriteLine(
+                    mytab + "],},\"modifiers\":[],\"trackColour\":4292102386,\"tracks\":["
+                );
+                // Tracks
+                DumpTracks(writer, track.Tracks, tabnum + 1);
+                writer.WriteLine(mytab + "],\"traits\":0,}");
+                break;
+
             default:
                 throw new Exception("Non traité : " + track.ModelName.Content);
                 break;
