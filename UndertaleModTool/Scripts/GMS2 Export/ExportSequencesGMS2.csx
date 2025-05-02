@@ -125,12 +125,21 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
-                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetSpriteKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
-                writer.WriteLine(
-                    myspaces + "],},\"modifiers\":[],\"trackColour\":4292102386,\"tracks\":["
-                );
+                UndertaleSequence.RealKeyframes realKeyframes =
+                    track.Keyframes as UndertaleSequence.RealKeyframes;
+                foreach (var frame in realKeyframes.List)
+                {
+                    writer.WriteLine(
+                        myspaces
+                            + "      "
+                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{\"0\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":16777215,\"EmbeddedAnimCurve\":null,},},\"Disabled\":false,\"id\":\"0431139e-476b-4c36-8c42-993ac8c39b23\",\"IsCreationKey\":false,\"Key\":20.0,\"Length\":1.0,\"Stretch\":false,},"
+                    );
+                }
+                // End Keyframes
+
                 // Tracks
                 DumpTracks(writer, track.Tracks, myspace + 4);
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
