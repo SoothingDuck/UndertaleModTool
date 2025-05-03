@@ -132,10 +132,33 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     track.Keyframes as UndertaleSequence.RealKeyframes;
                 foreach (var frame in realKeyframes.List)
                 {
-                    writer.WriteLine(
+                    writer.Write(
                         myspaces
                             + "      "
-                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{\"0\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":16777215,\"EmbeddedAnimCurve\":null,},},\"Disabled\":false,\"id\":\"0431139e-476b-4c36-8c42-993ac8c39b23\",\"IsCreationKey\":false,\"Key\":20.0,\"Length\":1.0,\"Stretch\":false,},"
+                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
+                    );
+                    // Channels
+                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    {
+                        writer.Write(
+                            "\""
+                                + kvp.Key
+                                + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                                + (int)kvp.Value.Value
+                                + ",\"EmbeddedAnimCurve\":null,},"
+                        );
+                    }
+                    // End Channels
+                    writer.WriteLine(
+                        "},\"Disabled\":"
+                            + (frame.Disabled ? "true" : "false")
+                            + ",\"IsCreationKey\":false,\"Key\":"
+                            + frame.Key
+                            + ",\"Length\":"
+                            + frame.Length
+                            + ",\"Stretch\":"
+                            + (frame.Stretch ? "true" : "false")
+                            + ",},"
                     );
                 }
                 // End Keyframes
