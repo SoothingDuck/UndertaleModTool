@@ -82,9 +82,9 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
-                UndertaleSequence.RealKeyframes realKeyframes =
-                    track.Keyframes as UndertaleSequence.RealKeyframes;
-                foreach (var frame in realKeyframes.List)
+                UndertaleSequence.InstanceKeyframes instanceKeyframes =
+                    track.Keyframes as UndertaleSequence.InstanceKeyframes;
+                foreach (var frame in instanceKeyframes.List)
                 {
                     writer.Write(
                         myspaces
@@ -92,15 +92,20 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                             + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
                     );
                     // Channels
-                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    foreach (
+                        KeyValuePair<
+                            int,
+                            UndertaleSequence.InstanceKeyframes.Data
+                        > kvp in frame.Channels
+                    )
                     {
-                        writer.Write(
-                            "\""
-                                + kvp.Key
-                                + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                                + (int)kvp.Value.Value
-                                + ",\"EmbeddedAnimCurve\":null,},"
-                        );
+                        // writer.Write(
+                        //     "\""
+                        //         + kvp.Key
+                        //         + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                        //         + (int)kvp.Value.Value
+                        //         + ",\"EmbeddedAnimCurve\":null,},"
+                        // );
                     }
                     // End Channels
                     writer.WriteLine(
@@ -132,9 +137,9 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
-                UndertaleSequence.RealKeyframes realKeyframes =
-                    track.Keyframes as UndertaleSequence.RealKeyframes;
-                foreach (var frame in realKeyframes.List)
+                UndertaleSequence.GraphicKeyframes graphicKeyframes =
+                    track.Keyframes as UndertaleSequence.GraphicKeyframes;
+                foreach (var frame in graphicKeyframes.List)
                 {
                     writer.Write(
                         myspaces
@@ -142,15 +147,20 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                             + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
                     );
                     // Channels
-                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    foreach (
+                        KeyValuePair<
+                            int,
+                            UndertaleSequence.GraphicKeyframes.Data
+                        > kvp in frame.Channels
+                    )
                     {
-                        writer.Write(
-                            "\""
-                                + kvp.Key
-                                + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                                + (int)kvp.Value.Value
-                                + ",\"EmbeddedAnimCurve\":null,},"
-                        );
+                        // writer.Write(
+                        //     "\""
+                        //         + kvp.Key
+                        //         + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                        //         + (int)kvp.Value.Value
+                        //         + ",\"EmbeddedAnimCurve\":null,},"
+                        // );
                     }
                     // End Channels
                     writer.WriteLine(
@@ -182,9 +192,9 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
-                UndertaleSequence.RealKeyframes realKeyframes =
+                UndertaleSequence.RealKeyframes colourKeyframes =
                     track.Keyframes as UndertaleSequence.RealKeyframes;
-                foreach (var frame in realKeyframes.List)
+                foreach (var frame in colourKeyframes.List)
                 {
                     writer.Write(
                         myspaces
