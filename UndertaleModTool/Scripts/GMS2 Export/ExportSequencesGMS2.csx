@@ -75,44 +75,98 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
             case "GMInstanceTrack":
                 writer.WriteLine(
                     myspaces
-                        + "{\"resourceType\":\"GMInstanceTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
+                        + "{\"resourceType\":\"GMColourTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
-                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetInstanceKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
-
                 // Keyframes
-                UndertaleSequence.InstanceKeyframes instanceKeyframes =
-                    track.Keyframes as UndertaleSequence.InstanceKeyframes;
-                foreach (var frame in instanceKeyframes.List)
+                UndertaleSequence.RealKeyframes realKeyframes =
+                    track.Keyframes as UndertaleSequence.RealKeyframes;
+                foreach (var frame in realKeyframes.List)
                 {
+                    writer.Write(
+                        myspaces
+                            + "      "
+                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
+                    );
+                    // Channels
+                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    {
+                        writer.Write(
+                            "\""
+                                + kvp.Key
+                                + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                                + (int)kvp.Value.Value
+                                + ",\"EmbeddedAnimCurve\":null,},"
+                        );
+                    }
+                    // End Channels
                     writer.WriteLine(
-                        "          {\"resourceType\":\"Keyframe<AssetInstanceKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{\"0\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\"obj_game_over_button_retry\",\"path\":\"objects/obj_game_over_button_retry/obj_game_over_button_retry.yy\",},},},\"Disabled\":false,\"id\":\"7378af4f-4d7a-4666-8a98-54d6964cb41a\",\"IsCreationKey\":false,\"Key\":20.0,\"Length\":60.0,\"Stretch\":false,},"
+                        "},\"Disabled\":"
+                            + (frame.Disabled ? "true" : "false")
+                            + ",\"IsCreationKey\":false,\"Key\":"
+                            + frame.Key.ToString("0.0")
+                            + ",\"Length\":"
+                            + frame.Length.ToString("0.0")
+                            + ",\"Stretch\":"
+                            + (frame.Stretch ? "true" : "false")
+                            + ",},"
                     );
                 }
                 // End Keyframes
 
-                writer.WriteLine(
-                    "        ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
-                );
                 // Tracks
                 DumpTracks(writer, track.Tracks, myspace + 4);
-                // End Tracks
-                writer.WriteLine(
-                    "            ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":[],\"traits\":0,},"
-                );
+                writer.WriteLine(myspaces + "],\"traits\":0,}");
                 break;
 
             case "GMGraphicTrack":
                 writer.WriteLine(
                     myspaces
-                        + "{\"resourceType\":\"GMGraphicTrack\",\"resourceVersion\":\"1.0\",\"name\":\"spr_arc_long\",\"builtinName\":0,\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetSpriteKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                        + "{\"resourceType\":\"GMColourTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
+                        + track.Name.Content
+                        + "\",\"builtinName\":"
+                        + (int)track.BuiltinName
+                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
-                writer.WriteLine(
-                    myspaces + "],},\"modifiers\":[],\"trackColour\":4292102386,\"tracks\":["
-                );
+                UndertaleSequence.RealKeyframes realKeyframes =
+                    track.Keyframes as UndertaleSequence.RealKeyframes;
+                foreach (var frame in realKeyframes.List)
+                {
+                    writer.Write(
+                        myspaces
+                            + "      "
+                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
+                    );
+                    // Channels
+                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    {
+                        writer.Write(
+                            "\""
+                                + kvp.Key
+                                + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                                + (int)kvp.Value.Value
+                                + ",\"EmbeddedAnimCurve\":null,},"
+                        );
+                    }
+                    // End Channels
+                    writer.WriteLine(
+                        "},\"Disabled\":"
+                            + (frame.Disabled ? "true" : "false")
+                            + ",\"IsCreationKey\":false,\"Key\":"
+                            + frame.Key.ToString("0.0")
+                            + ",\"Length\":"
+                            + frame.Length.ToString("0.0")
+                            + ",\"Stretch\":"
+                            + (frame.Stretch ? "true" : "false")
+                            + ",},"
+                    );
+                }
+                // End Keyframes
+
                 // Tracks
                 DumpTracks(writer, track.Tracks, myspace + 4);
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
@@ -153,9 +207,9 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         "},\"Disabled\":"
                             + (frame.Disabled ? "true" : "false")
                             + ",\"IsCreationKey\":false,\"Key\":"
-                            + frame.Key
+                            + frame.Key.ToString("0.0")
                             + ",\"Length\":"
-                            + frame.Length
+                            + frame.Length.ToString("0.0")
                             + ",\"Stretch\":"
                             + (frame.Stretch ? "true" : "false")
                             + ",},"
@@ -171,16 +225,48 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
             case "GMRealTrack":
                 writer.WriteLine(
                     myspaces
-                        + "{\"resourceType\":\"GMRealTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
+                        + "{\"resourceType\":\"GMColourTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
-                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetSpriteKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
-                writer.WriteLine(
-                    myspaces + "],},\"modifiers\":[],\"trackColour\":4292102386,\"tracks\":["
-                );
+                UndertaleSequence.RealKeyframes realKeyframes =
+                    track.Keyframes as UndertaleSequence.RealKeyframes;
+                foreach (var frame in realKeyframes.List)
+                {
+                    writer.Write(
+                        myspaces
+                            + "      "
+                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
+                    );
+                    // Channels
+                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    {
+                        writer.Write(
+                            "\""
+                                + kvp.Key
+                                + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                                + (int)kvp.Value.Value
+                                + ",\"EmbeddedAnimCurve\":null,},"
+                        );
+                    }
+                    // End Channels
+                    writer.WriteLine(
+                        "},\"Disabled\":"
+                            + (frame.Disabled ? "true" : "false")
+                            + ",\"IsCreationKey\":false,\"Key\":"
+                            + frame.Key.ToString("0.0")
+                            + ",\"Length\":"
+                            + frame.Length.ToString("0.0")
+                            + ",\"Stretch\":"
+                            + (frame.Stretch ? "true" : "false")
+                            + ",},"
+                    );
+                }
+                // End Keyframes
+
                 // Tracks
                 DumpTracks(writer, track.Tracks, myspace + 4);
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
