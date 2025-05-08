@@ -75,7 +75,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
             case "GMInstanceTrack":
                 writer.WriteLine(
                     myspaces
-                        + "{\"resourceType\":\"GMColourTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
+                        + "{\"resourceType\":\"GMInstanceTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
@@ -130,7 +130,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
             case "GMGraphicTrack":
                 writer.WriteLine(
                     myspaces
-                        + "{\"resourceType\":\"GMColourTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
+                        + "{\"resourceType\":\"GMGraphicTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
@@ -235,7 +235,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
             case "GMRealTrack":
                 writer.WriteLine(
                     myspaces
-                        + "{\"resourceType\":\"GMColourTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
+                        + "{\"resourceType\":\"GMRealTrack\",\"resourceVersion\":\"1.0\",\"name\":\""
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
