@@ -79,7 +79,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
-                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<AssetInstanceKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
                 UndertaleSequence.InstanceKeyframes instanceKeyframes =
@@ -89,7 +89,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     writer.Write(
                         myspaces
                             + "      "
-                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
+                            + "{\"resourceType\":\"Keyframe<AssetInstanceKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
                     );
                     // Channels
                     foreach (
@@ -99,11 +99,16 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         > kvp in frame.Channels
                     )
                     {
+                        writer.Write(
+                            "\""
+                                + kvp.Key
+                                + "\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\"obj_game_over_button_retry\",\"path\":\"objects/obj_game_over_button_retry/obj_game_over_button_retry.yy\",},"
+                        );
                         // writer.Write(
                         //     "\""
                         //         + kvp.Key
                         //         + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                        //         + (int)kvp.Value.Value
+                        //         // + (int)kvp.Value.Value
                         //         + ",\"EmbeddedAnimCurve\":null,},"
                         // );
                     }
