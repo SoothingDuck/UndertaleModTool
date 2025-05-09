@@ -127,7 +127,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                 }
                 // End Keyframes
                 writer.WriteLine(
-                    myspaces + "  ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
+                    myspaces + "    ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
                 );
                 // Tracks
                 DumpTracks(writer, track.Tracks, myspace + 4);
