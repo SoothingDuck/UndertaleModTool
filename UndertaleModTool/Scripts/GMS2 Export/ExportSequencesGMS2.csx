@@ -102,7 +102,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         writer.Write(
                             "\""
                                 + kvp.Key
-                                + "\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\"obj_game_over_button_retry\",\"path\":\"objects/obj_game_over_button_retry/obj_game_over_button_retry.yy\",},"
+                                + "\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\"obj_game_over_button_retry\",\"path\":\"objects/obj_game_over_button_retry/obj_game_over_button_retry.yy\",},},"
                         );
                         // writer.Write(
                         //     "\""
@@ -126,7 +126,9 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     );
                 }
                 // End Keyframes
-
+                writer.WriteLine(
+                    myspaces + "  ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
+                );
                 // Tracks
                 DumpTracks(writer, track.Tracks, myspace + 4);
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
