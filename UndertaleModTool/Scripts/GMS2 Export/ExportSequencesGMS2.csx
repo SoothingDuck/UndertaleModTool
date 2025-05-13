@@ -126,11 +126,15 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     );
                 }
                 // End Keyframes
-                writer.WriteLine(
+                writer.Write(
                     myspaces + "    ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
                 );
                 // Tracks
-                DumpTracks(writer, track.Tracks, myspace + 4);
+                if (track.Tracks.Count > 0)
+                {
+                    write.WriteLine("");
+                    DumpTracks(writer, track.Tracks, myspace + 4);
+                }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
                 break;
 
@@ -183,9 +187,15 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     );
                 }
                 // End Keyframes
-
+                writer.Write(
+                    myspaces + "    ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
+                );
                 // Tracks
-                DumpTracks(writer, track.Tracks, myspace + 4);
+                if (track.Tracks.Count > 0)
+                {
+                    write.WriteLine("");
+                    DumpTracks(writer, track.Tracks, myspace + 4);
+                }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
                 break;
 
@@ -233,9 +243,15 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     );
                 }
                 // End Keyframes
-
+                writer.Write(
+                    myspaces + "    ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
+                );
                 // Tracks
-                DumpTracks(writer, track.Tracks, myspace + 4);
+                if (track.Tracks.Count > 0)
+                {
+                    write.WriteLine("");
+                    DumpTracks(writer, track.Tracks, myspace + 4);
+                }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
                 break;
 
@@ -283,9 +299,15 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     );
                 }
                 // End Keyframes
-
+                writer.Write(
+                    myspaces + "    ],},\"modifiers\":[],\"trackColour\":4283298376,\"tracks\":["
+                );
                 // Tracks
-                DumpTracks(writer, track.Tracks, myspace + 4);
+                if (track.Tracks.Count > 0)
+                {
+                    write.WriteLine("");
+                    DumpTracks(writer, track.Tracks, myspace + 4);
+                }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
                 break;
 
