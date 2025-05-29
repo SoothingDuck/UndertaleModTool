@@ -217,10 +217,10 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     {
                         writer.Write(
                             "\""
-                                // + kvp.Key
-                                + "4294967295"
+                                + kvp.Key
                                 + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                                + (int)kvp.Value.Value
+                                // + (int)kvp.Value.Value
+                                + "4294967295"
                                 + ",\"EmbeddedAnimCurve\":null,},"
                         );
                     }
