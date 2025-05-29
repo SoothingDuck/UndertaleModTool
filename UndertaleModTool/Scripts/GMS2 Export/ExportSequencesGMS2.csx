@@ -132,7 +132,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                 // Tracks
                 if (track.Tracks.Count > 0)
                 {
-                    write.WriteLine("");
+                    writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
@@ -193,7 +193,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                 // Tracks
                 if (track.Tracks.Count > 0)
                 {
-                    write.WriteLine("");
+                    writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
@@ -249,7 +249,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                 // Tracks
                 if (track.Tracks.Count > 0)
                 {
-                    write.WriteLine("");
+                    writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
@@ -305,7 +305,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                 // Tracks
                 if (track.Tracks.Count > 0)
                 {
-                    write.WriteLine("");
+                    writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
                 writer.WriteLine(myspaces + "],\"traits\":0,}");
