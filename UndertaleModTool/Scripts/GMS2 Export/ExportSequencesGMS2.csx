@@ -102,15 +102,14 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         writer.Write(
                             "\""
                                 + kvp.Key
-                                + "\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\"obj_game_over_button_retry\",\"path\":\"objects/obj_game_over_button_retry/obj_game_over_button_retry.yy\",},},"
+                                + "\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\""
+                                + kvp.Value.Resource.Resource.Name.Content
+                                + "\",\"path\":\"objects/"
+                                + kvp.Value.Resource.Resource.Name.Content
+                                + "/"
+                                + kvp.Value.Resource.Resource.Name.Content
+                                + ".yy\",},},"
                         );
-                        // writer.Write(
-                        //     "\""
-                        //         + kvp.Key
-                        //         + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                        //         // + (int)kvp.Value.Value
-                        //         + ",\"EmbeddedAnimCurve\":null,},"
-                        // );
                     }
                     // End Channels
                     writer.WriteLine(
