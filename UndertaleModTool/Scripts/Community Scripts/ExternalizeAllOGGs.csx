@@ -117,7 +117,16 @@ void ExternalizeSound(UndertaleSound sound)
         }
         else //For sounds embedded in the external audiogroup.dat files.
         {
-            string audioGroupPath = Path.Combine(winFolder, "audiogroup" + _groupid.ToString() + ".dat");
+            string relativeAudioGroupPath;
+            if (sound.AudioGroup is UndertaleAudioGroup { Path.Content: string customRelativePath })
+            {
+                relativeAudioGroupPath = customRelativePath;
+            }
+            else
+            {
+                relativeAudioGroupPath = $"audiogroup{sound.GroupID}.dat";
+            }
+            string audioGroupPath = Path.Combine(winFolder, relativeAudioGroupPath);
             var audioGroupReadStream = (new FileStream(audioGroupPath, FileMode.Open, FileAccess.Read)); // Load the audiogroup dat into memory
             UndertaleData audioGroupDat = UndertaleIO.Read(audioGroupReadStream); // Load as UndertaleData
             audioGroupReadStream.Dispose();
@@ -171,7 +180,16 @@ IList<UndertaleEmbeddedAudio> GetAudioGroupData(UndertaleSound sound)
     if (loadedAudioGroups.ContainsKey(audioGroupName))
         return loadedAudioGroups[audioGroupName];
 
-    string groupFilePath = Path.Combine(winFolder, "audiogroup" + sound.GroupID + ".dat");
+    string relativeAudioGroupPath;
+    if (sound.AudioGroup is UndertaleAudioGroup { Path.Content: string customRelativePath })
+    {
+        relativeAudioGroupPath = customRelativePath;
+    }
+    else
+    {
+        relativeAudioGroupPath = $"audiogroup{sound.GroupID}.dat";
+    }
+    string groupFilePath = Path.Combine(winFolder, relativeAudioGroupPath);
     if (!File.Exists(groupFilePath))
         return null; // Doesn't exist.
 
@@ -179,7 +197,7 @@ IList<UndertaleEmbeddedAudio> GetAudioGroupData(UndertaleSound sound)
     {
         UndertaleData data = null;
         using (var stream = new FileStream(groupFilePath, FileMode.Open, FileAccess.Read))
-            data = UndertaleIO.Read(stream, warning => ScriptMessage("A warning occured while trying to load " + audioGroupName + ":\n" + warning));
+            data = UndertaleIO.Read(stream, (warning, _) => ScriptMessage("A warning occured while trying to load " + audioGroupName + ":\n" + warning));
 
         loadedAudioGroups[audioGroupName] = data.EmbeddedAudio;
         return data.EmbeddedAudio;
