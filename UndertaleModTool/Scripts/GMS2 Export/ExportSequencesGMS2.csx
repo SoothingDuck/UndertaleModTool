@@ -135,7 +135,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
-                writer.WriteLine(myspaces + "],\"traits\":0,}");
+                writer.WriteLine("],\"traits\":0,},");
                 break;
 
             case "GMGraphicTrack":
@@ -196,7 +196,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
-                writer.WriteLine(myspaces + "],\"traits\":0,}");
+                writer.WriteLine("],\"traits\":0,},");
                 break;
 
             case "GMColourTrack":
@@ -252,7 +252,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
-                writer.WriteLine(myspaces + "],\"traits\":0,}");
+                writer.WriteLine("],\"traits\":0,},");
                 break;
 
             case "GMRealTrack":
@@ -308,7 +308,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
                 }
-                writer.WriteLine(myspaces + "],\"traits\":0,}");
+                writer.WriteLine("],\"traits\":0,},");
                 break;
 
             default:
