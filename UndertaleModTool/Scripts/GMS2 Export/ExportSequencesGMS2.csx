@@ -134,6 +134,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                 {
                     writer.WriteLine("");
                     DumpTracks(writer, track.Tracks, myspace + 4);
+                    writer.Write(new String(' ', myspace + 2));
                 }
                 writer.WriteLine("],\"traits\":0,},");
                 break;
@@ -262,7 +263,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         + track.Name.Content
                         + "\",\"builtinName\":"
                         + (int)track.BuiltinName
-                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
+                        + ",\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<RealKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
                 );
                 // Keyframes
                 UndertaleSequence.RealKeyframes realKeyframes =
@@ -272,7 +273,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     writer.Write(
                         myspaces
                             + "      "
-                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
+                            + "{\"resourceType\":\"Keyframe<RealKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
                     );
                     // Channels
                     foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
@@ -280,10 +281,17 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         writer.Write(
                             "\""
                                 + kvp.Key
-                                + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                                + (int)kvp.Value.Value
-                                + ",\"EmbeddedAnimCurve\":null,},"
+                                + "\":{\"resourceType\":\"RealKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"EmbeddedAnimCurve\":null,\"RealValue\":"
+                                + kvp.Value.Value.ToString("0.0")
+                                + ",},"
                         );
+                        // writer.Write(
+                        //     "\""
+                        //         + kvp.Key
+                        //         + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                        //         + (int)kvp.Value.Value
+                        //         + ",\"EmbeddedAnimCurve\":null,},"
+                        // );
                     }
                     // End Channels
                     writer.WriteLine(
