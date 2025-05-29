@@ -165,13 +165,7 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                         > kvp in frame.Channels
                     )
                     {
-                        // writer.Write(
-                        //     "\""
-                        //         + kvp.Key
-                        //         + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                        //         + (int)kvp.Value.Value
-                        //         + ",\"EmbeddedAnimCurve\":null,},"
-                        // );
+                        throw new Exception("Non traité");
                     }
                     // End Channels
                     writer.WriteLine(
@@ -223,7 +217,8 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     {
                         writer.Write(
                             "\""
-                                + kvp.Key
+                                // + kvp.Key
+                                + "4294967295"
                                 + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
                                 + (int)kvp.Value.Value
                                 + ",\"EmbeddedAnimCurve\":null,},"
@@ -284,13 +279,6 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                                 + kvp.Value.Value.ToString("0.0")
                                 + ",},"
                         );
-                        // writer.Write(
-                        //     "\""
-                        //         + kvp.Key
-                        //         + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                        //         + (int)kvp.Value.Value
-                        //         + ",\"EmbeddedAnimCurve\":null,},"
-                        // );
                     }
                     // End Channels
                     writer.WriteLine(

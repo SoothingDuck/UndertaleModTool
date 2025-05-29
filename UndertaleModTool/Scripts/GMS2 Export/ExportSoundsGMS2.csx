@@ -102,7 +102,7 @@ IList<UndertaleEmbeddedAudio> GetAudioGroupData(UndertaleSound sound)
         using (var stream = new FileStream(groupFilePath, FileMode.Open, FileAccess.Read))
             data = UndertaleIO.Read(
                 stream,
-                warning =>
+                (warning, _) =>
                     ScriptMessage(
                         "A warning occured while trying to load " + audioGroupName + ":\n" + warning
                     )
