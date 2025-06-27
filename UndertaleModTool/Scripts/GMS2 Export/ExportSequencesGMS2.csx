@@ -277,13 +277,13 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                     );
 
                     // Channels
-                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    foreach (var channel in frame.Channels)
                     {
                         writer.Write(
                             "\""
-                                + kvp.Key
+                                + channel.Channel
                                 + "\":{\"resourceType\":\"RealKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"EmbeddedAnimCurve\":null,\"RealValue\":"
-                                + kvp.Value.Value.ToString("0.0")
+                                + channel.Value.Value.ToString("0.0")
                                 + ",},"
                         );
                     }
