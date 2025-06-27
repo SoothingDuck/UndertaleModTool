@@ -92,27 +92,21 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                             + "{\"resourceType\":\"Keyframe<AssetInstanceKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
                     );
 
-                    throw new Exception("Je suis arrivé jusqu'ici : InstanceKeyframes");
                     // Channels
-                    // foreach (
-                    //     KeyValuePair<
-                    //         int,
-                    //         UndertaleSequence.InstanceKeyframes.Data
-                    //     > kvp in frame.Channels
-                    // )
-                    // {
-                    //     writer.Write(
-                    //         "\""
-                    //             + kvp.Key
-                    //             + "\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\""
-                    //             + kvp.Value.Resource.Resource.Name.Content
-                    //             + "\",\"path\":\"objects/"
-                    //             + kvp.Value.Resource.Resource.Name.Content
-                    //             + "/"
-                    //             + kvp.Value.Resource.Resource.Name.Content
-                    //             + ".yy\",},},"
-                    //     );
-                    // }
+                    foreach (var channel in frame.Channels)
+                    {
+                        writer.Write(
+                            "\""
+                                + channel.Channel
+                                + "\":{\"resourceType\":\"AssetInstanceKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\""
+                                + channel.Value.Resource.Resource.Name.Content
+                                + "\",\"path\":\"objects/"
+                                + channel.Value.Resource.Resource.Name.Content
+                                + "/"
+                                + channel.Value.Resource.Resource.Name.Content
+                                + ".yy\",},},"
+                        );
+                    }
                     // End Channels
                     writer.WriteLine(
                         "},\"Disabled\":"
