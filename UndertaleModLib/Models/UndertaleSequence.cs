@@ -26,7 +26,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
         /// <summary>
         /// Upon reaching either end, the sequence reverses direction.
         /// </summary>
-        Pingpong = 2
+        Pingpong = 2,
     }
 
     /// <inheritdoc/>
@@ -76,7 +76,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
     /// Height of the sequence, used in GameMaker 2024.13 and above.
     /// </summary>
     public float Height { get; set; }
-    
+
     /// <summary>
     /// List of broadcast message keyframes in the sequence.
     /// </summary>
@@ -149,7 +149,9 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
             Height = reader.ReadSingle();
         }
 
-        BroadcastMessages = reader.ReadUndertaleObject<UndertaleSimpleList<Keyframe<BroadcastMessage>>>();
+        BroadcastMessages = reader.ReadUndertaleObject<
+            UndertaleSimpleList<Keyframe<BroadcastMessage>>
+        >();
 
         Tracks = reader.ReadUndertaleObject<UndertaleSimpleList<Track>>();
 
@@ -172,7 +174,8 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
 
         reader.Position += reader.undertaleData.IsVersionAtLeast(2024, 13) ? 40 : 32;
 
-        count += 1 + UndertaleSimpleList<Keyframe<BroadcastMessage>>.UnserializeChildObjectCount(reader);
+        count +=
+            1 + UndertaleSimpleList<Keyframe<BroadcastMessage>>.UnserializeChildObjectCount(reader);
 
         count += 1 + UndertaleSimpleList<Track>.UnserializeChildObjectCount(reader);
 
@@ -206,7 +209,8 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
     /// A keyframe of data stored within a sequence track, at a given time/duration, and for some number of channels.
     /// </summary>
     /// <typeparam name="T">Type of data this keyframe will hold.</typeparam>
-    public sealed class Keyframe<T> : UndertaleObject, INotifyPropertyChanged where T : UndertaleObject, new()
+    public sealed class Keyframe<T> : UndertaleObject, INotifyPropertyChanged
+        where T : UndertaleObject, new()
     {
         /// <summary>
         /// Start time of the keyframe.
@@ -417,7 +421,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
             FrameSize = 20,
             CharacterSpacing = 21,
             LineSpacing = 22,
-            ParagraphSpacing = 23
+            ParagraphSpacing = 23,
         }
 
         /// <summary>
@@ -427,7 +431,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
         public enum TrackTraits
         {
             None,
-            ChildrenIgnoreOrigin
+            ChildrenIgnoreOrigin,
         }
 
         /// <summary>
@@ -502,7 +506,9 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
             {
                 if (res is UndertaleAnimationCurve)
                 {
-                    writer.WriteUndertaleString(_gmAnimCurveString ??= new UndertaleString("GMAnimCurve"));
+                    writer.WriteUndertaleString(
+                        _gmAnimCurveString ??= new UndertaleString("GMAnimCurve")
+                    );
                     res.Serialize(writer);
                 }
                 else
@@ -545,7 +551,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
                 case "GMAudioEffectTrack":
                     writer.WriteUndertaleObject(Keyframes as RealKeyframes);
                     break;
-                case "GMTextTrack":     // Introduced in GM 2022.2
+                case "GMTextTrack": // Introduced in GM 2022.2
                     writer.WriteUndertaleObject(Keyframes as TextKeyframes);
                     break;
                 case "GMParticleTrack": // Introduced in GM 2023.2
@@ -636,7 +642,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
                 case "GMAudioEffectTrack":
                     Keyframes = reader.ReadUndertaleObject<RealKeyframes>();
                     break;
-                case "GMTextTrack":     // Introduced in GM 2022.2
+                case "GMTextTrack": // Introduced in GM 2022.2
                     if (!reader.undertaleData.IsVersionAtLeast(2022, 2))
                         reader.undertaleData.SetGMS2Version(2022, 2);
                     Keyframes = reader.ReadUndertaleObject<TextKeyframes>();
@@ -644,7 +650,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
                 case "GMParticleTrack": // Introduced in GM 2023.2
                     Keyframes = reader.ReadUndertaleObject<ParticleKeyframes>();
                     break;
-                
+
                 // "GMGroupTrack" and "GMClipMaskTrack" have null keyframes
             }
         }
@@ -719,7 +725,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
                 case "GMAudioEffectTrack":
                     count += 1 + RealKeyframes.UnserializeChildObjectCount(reader);
                     break;
-                case "GMTextTrack":     // Introduced in GM 2022.2
+                case "GMTextTrack": // Introduced in GM 2022.2
                     count += 1 + TextKeyframes.UnserializeChildObjectCount(reader);
                     break;
                 case "GMParticleTrack": // Introduced in GM 2023.2
@@ -750,15 +756,14 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
     /// <summary>
     /// Base interface used for track keyframes.
     /// </summary>
-    public interface ITrackKeyframes : UndertaleObject
-    {
-    }
+    public interface ITrackKeyframes : UndertaleObject { }
 
     /// <summary>
     /// Base implementation of track keyframes, containing a simple list of keyframes.
     /// </summary>
     /// <typeparam name="T">Type used for keyframe data.</typeparam>
-    public abstract class TrackKeyframes<T> : ITrackKeyframes where T : UndertaleObject, new()
+    public abstract class TrackKeyframes<T> : ITrackKeyframes
+        where T : UndertaleObject, new()
     {
         /// <summary>
         /// List of keyframes in the track.
@@ -791,13 +796,15 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
             return UndertaleSimpleList<Keyframe<T>>.UnserializeChildObjectCount(reader);
         }
     }
-    
+
     /// <summary>
     /// Keyframe data implementation for a resource ID reference.
     /// </summary>
     /// <typeparam name="T">Type of the resource being referenced.</typeparam>
     /// <typeparam name="ChunkT">Type of the chunk for the resource being referenced.</typeparam>
-    public abstract class ResourceData<T, ChunkT> : UndertaleObject where T : UndertaleResource, new() where ChunkT : UndertaleListChunk<T>
+    public abstract class ResourceData<T, ChunkT> : UndertaleObject
+        where T : UndertaleResource, new()
+        where ChunkT : UndertaleListChunk<T>
     {
         /// <summary>
         /// Resource ID reference.
@@ -998,7 +1005,10 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
         /// <summary>
         /// If <see cref="IsCurveEmbedded"/> is <see langword="false"/>, this is a reference to an external animation curve asset.
         /// </summary>
-        public UndertaleResourceById<UndertaleAnimationCurve, UndertaleChunkACRV> AssetAnimCurve { get; set; }
+        public UndertaleResourceById<
+            UndertaleAnimationCurve,
+            UndertaleChunkACRV
+        > AssetAnimCurve { get; set; }
 
         /// <inheritdoc />
         public virtual void Serialize(UndertaleWriter writer)
@@ -1031,7 +1041,8 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
             {
                 // The curve data is an asset in the project
                 IsCurveEmbedded = false;
-                AssetAnimCurve = new UndertaleResourceById<UndertaleAnimationCurve, UndertaleChunkACRV>();
+                AssetAnimCurve =
+                    new UndertaleResourceById<UndertaleAnimationCurve, UndertaleChunkACRV>();
                 AssetAnimCurve.Unserialize(reader);
             }
         }
@@ -1040,7 +1051,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
         public static uint UnserializeChildObjectCount(UndertaleReader reader)
         {
             uint count = 0;
-            
+
             // "IsCurveEmbedded"
             if (reader.ReadBoolean())
             {
@@ -1206,7 +1217,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
             return UndertaleSimpleList<Keyframe<RealData>>.UnserializeChildObjectCount(reader);
         }
     }
-    
+
     /// <summary>
     /// Keyframe store for text keyframes.
     /// </summary>
@@ -1232,7 +1243,7 @@ public class UndertaleSequence : UndertaleNamedResource, INotifyPropertyChanged,
             /// Whether line wrapping is enabled.
             /// </summary>
             public bool Wrap { get; set; }
-            
+
             /// <summary>
             /// Vertical alignment.
             /// </summary>

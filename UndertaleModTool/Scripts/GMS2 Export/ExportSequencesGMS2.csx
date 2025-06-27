@@ -204,40 +204,44 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                 // Keyframes
                 UndertaleSequence.RealKeyframes colourKeyframes =
                     track.Keyframes as UndertaleSequence.RealKeyframes;
-                foreach (var frame in colourKeyframes.List)
+
+                if (colourKeyframes != null)
                 {
-                    writer.Write(
-                        myspaces
-                            + "      "
-                            + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
-                    );
+                    foreach (var frame in colourKeyframes.List)
+                    {
+                        writer.Write(
+                            myspaces
+                                + "      "
+                                + "{\"resourceType\":\"Keyframe<ColourKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
+                        );
 
-                    throw new Exception("Je suis arrivé jusque là : RealKeyframes");
+                        throw new Exception("Je suis arrivé jusque là : RealKeyframes");
 
-                    // Channels
-                    // foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
-                    // {
-                    //     writer.Write(
-                    //         "\""
-                    //             + kvp.Key
-                    //             + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
-                    //             // + (int)kvp.Value.Value
-                    //             + "4294967295"
-                    //             + ",\"EmbeddedAnimCurve\":null,},"
-                    //     );
-                    // }
-                    // End Channels
-                    writer.WriteLine(
-                        "},\"Disabled\":"
-                            + (frame.Disabled ? "true" : "false")
-                            + ",\"IsCreationKey\":false,\"Key\":"
-                            + frame.Key.ToString("0.0")
-                            + ",\"Length\":"
-                            + frame.Length.ToString("0.0")
-                            + ",\"Stretch\":"
-                            + (frame.Stretch ? "true" : "false")
-                            + ",},"
-                    );
+                        // Channels
+                        // foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                        // {
+                        //     writer.Write(
+                        //         "\""
+                        //             + kvp.Key
+                        //             + "\":{\"resourceType\":\"ColourKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"Colour\":"
+                        //             // + (int)kvp.Value.Value
+                        //             + "4294967295"
+                        //             + ",\"EmbeddedAnimCurve\":null,},"
+                        //     );
+                        // }
+                        // End Channels
+                        writer.WriteLine(
+                            "},\"Disabled\":"
+                                + (frame.Disabled ? "true" : "false")
+                                + ",\"IsCreationKey\":false,\"Key\":"
+                                + frame.Key.ToString("0.0")
+                                + ",\"Length\":"
+                                + frame.Length.ToString("0.0")
+                                + ",\"Stretch\":"
+                                + (frame.Stretch ? "true" : "false")
+                                + ",},"
+                        );
+                    }
                 }
                 // End Keyframes
                 writer.Write(
@@ -272,19 +276,17 @@ void DumpTracks(StreamWriter writer, List<UndertaleSequence.Track> tracks, int m
                             + "{\"resourceType\":\"Keyframe<RealKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{"
                     );
 
-                    throw new Exception("Je suis arrivé jusque là : RealKeyframes");
-
                     // Channels
-                    // foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
-                    // {
-                    //     writer.Write(
-                    //         "\""
-                    //             + kvp.Key
-                    //             + "\":{\"resourceType\":\"RealKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"EmbeddedAnimCurve\":null,\"RealValue\":"
-                    //             + kvp.Value.Value.ToString("0.0")
-                    //             + ",},"
-                    //     );
-                    // }
+                    foreach (KeyValuePair<int, UndertaleSequence.RealData> kvp in frame.Channels)
+                    {
+                        writer.Write(
+                            "\""
+                                + kvp.Key
+                                + "\":{\"resourceType\":\"RealKeyframe\",\"resourceVersion\":\"1.0\",\"AnimCurveId\":null,\"EmbeddedAnimCurve\":null,\"RealValue\":"
+                                + kvp.Value.Value.ToString("0.0")
+                                + ",},"
+                        );
+                    }
                     // End Channels
                     writer.WriteLine(
                         "},\"Disabled\":"
