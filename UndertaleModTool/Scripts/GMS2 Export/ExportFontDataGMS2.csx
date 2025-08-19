@@ -1,4 +1,5 @@
-﻿// Made by mono21400
+﻿
+// Made by mono21400
 using System;
 using System.IO;
 using System.Linq;
@@ -118,7 +119,29 @@ void DumpFont(UndertaleFont font)
         writer.WriteLine("  \"includeTTF\": false,");
         writer.WriteLine("  \"interpreter\": 0,");
         writer.WriteLine("  \"italic\": " + (font.Italic ? "true" : "false") + ",");
-        writer.WriteLine("  \"kerningPairs\": [],");
+
+	writer.Write("  \"kerningPairs\": [");
+	if(font.Glyphs.Count > 0) {
+		bool hasGlyph = false;
+		foreach (var g in font.Glyphs)
+		{
+			if(g.Kerning.Count > 0)
+			{
+				hasGlyph = true;
+				foreach(var k in g.Kerning)
+				{
+					writer.WriteLine();
+					writer.Write("    {\"amount\":"+k.ShiftModifier+",\"first\":"+k.Character+",\"second\":"+g.Character+",}");
+				}
+			}
+		}
+		if(hasGlyph)
+		{
+			writer.WriteLine();
+			writer.Write("  ");
+		}
+	}
+	writer.WriteLine("],");
         writer.WriteLine("  \"last\": 0,");
         if (Data.IsVersionAtLeast(2023, 6))
         {
