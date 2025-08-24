@@ -12,9 +12,11 @@ font:
 
 game_object:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportGameObjectsGMS2.csx"
+	find objects -name "*.yy" -exec unix2dos {} \;
 
 path:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportPathDataGMS2.csx"
+	find paths -name "*.yy" -exec unix2dos {} \;
 
 project:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportProjectGMS2.csx"
@@ -23,6 +25,7 @@ project:
 
 room:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportRoomsGMS2.csx"
+	find rooms -name "*.yy" -exec unix2dos {} \;
 
 code:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportScriptCodeGMS2.csx"
@@ -35,6 +38,7 @@ sequence:
 
 shader:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportShaderGMS2.csx"
+	find shaders -name "*.yy" -exec unix2dos {} \;
 
 sound:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSoundsGMS2.csx"
@@ -42,6 +46,8 @@ sound:
 
 sprite:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportSpritesGMS2.csx"
+	find sprites -name "*.yy" -exec unix2dos {} \;
 
 tile:
 	${UNDERTALEMODCLI} load ${DATAFILE} -s "${SCRIPTGMS2DIR}/ExportTilesetsGMS2.csx"
+	find tilesets -name "*.yy" -exec unix2dos {} \;
