@@ -449,6 +449,7 @@ void DumpBackground(UndertaleBackground background)
         writer.WriteLine("    \"showBackdrop\": true,");
         writer.WriteLine("    \"showBackdropImage\": false,");
         writer.WriteLine("    \"timeUnits\": 1,");
+        // tracks
         writer.WriteLine("    \"tracks\": [");
         writer.WriteLine(
             "      {\"resourceType\":\"GMSpriteFramesTrack\",\"resourceVersion\":\"1.0\",\"name\":\"frames\",\"builtinName\":0,\"events\":[],\"inheritsTrackColour\":true,\"interpolation\":1,\"isCreationTrack\":false,\"keyframes\":{\"resourceType\":\"KeyframeStore<SpriteFrameKeyframe>\",\"resourceVersion\":\"1.0\",\"Keyframes\":["
@@ -466,6 +467,7 @@ void DumpBackground(UndertaleBackground background)
             "          ],},\"modifiers\":[],\"spriteId\":null,\"trackColour\":0,\"tracks\":[],\"traits\":0,},"
         );
         writer.WriteLine("    ],");
+        // end : tracks
         writer.WriteLine("    \"visibleRange\": null,");
         writer.WriteLine("    \"volume\": 1.0,");
         writer.WriteLine("    \"xorigin\": 0,");

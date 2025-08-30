@@ -140,8 +140,8 @@ void DumpTileset(UndertaleBackground tileset)
             writer_sprite.WriteLine("  \"layers\": [");
             writer_sprite.WriteLine(
                 "    {\"resourceType\":\"GMImageLayer\",\"resourceVersion\":\"1.0\",\"name\":\""
-                    + "spr_" + tileset.Name.Content + "_" + "layer"
-                    + "\",\"blendMode\":0,\"displayName\":\"default\",\"isLocked\":false,\"opacity\":100.0,\"visible\":true,},"
+                + "spr_" + tileset.Name.Content + "_" + "layer"
+                + "\",\"blendMode\":0,\"displayName\":\"default\",\"isLocked\":false,\"opacity\":100.0,\"visible\":true,},"
             );
             writer_sprite.WriteLine("  ],");
             // END : layers
@@ -190,14 +190,12 @@ void DumpTileset(UndertaleBackground tileset)
             );
             writer_sprite.WriteLine(
                 "            {\"resourceType\":\"Keyframe<SpriteFrameKeyframe>\",\"resourceVersion\":\"1.0\",\"Channels\":{\"0\":{\"resourceType\":\"SpriteFrameKeyframe\",\"resourceVersion\":\"1.0\",\"Id\":{\"name\":\""
-                    + "spr_" + tileset.Name.Content + "_0"
-                    + "\",\"path\":\"sprites/"
-                    + "spr_" + tileset.Name.Content
-                    + Path.DirectorySeparatorChar
-                    + "spr_" + tileset.Name.Content
-                    + ".yy\",},},},\"Disabled\":false,\"IsCreationKey\":false,\"Key\":"
-                    + "0.0"
-                    + ",\"Length\":1.0,\"Stretch\":false,},"
+                + "spr_" + tileset.Name.Content
+                + "\",\"path\":\"sprites/"
+                + "spr_" + tileset.Name.Content
+                + "/"
+                + "spr_" + tileset.Name.Content
+                + ".yy\",},},},\"Disabled\":false,\"IsCreationKey\":false,\"Key\":0.0,\"Length\":1.0,\"Stretch\":false,},"
             );
             writer_sprite.WriteLine(
                 "          ],},\"modifiers\":[],\"spriteId\":null,\"trackColour\":0,\"tracks\":[],\"traits\":0,},"
