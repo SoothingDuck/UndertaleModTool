@@ -1,3 +1,6 @@
 [submodule "Underanalyzer"]
 	path = Underanalyzer
 	url = https://github.com/UnderminersTeam/Underanalyzer.git
+[submodule "UndertaleModTool/Scripts/GMS2-Export"]
+	path = UndertaleModTool/Scripts/GMS2-Export
+	url = git@github.com:SoothingDuck/GMS2-Export.git
