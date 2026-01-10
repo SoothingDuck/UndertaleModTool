@@ -1,0 +1,6 @@
+UNDERTALEMODTOOLDIR = $(HOME)/dev/gamemaker/UndertaleModTool
+UNDERTALEMODCLI = $(UNDERTALEMODTOOLDIR)/UndertaleModCli/bin/Release/net10.0/publish/UndertaleModCli
+SCRIPTDIR = $(UNDERTALEMODTOOLDIR)/UndertaleModTool/Scripts/GMS2-Export
+
+font:
+	$(UNDERTALEMODCLI) load data.win -s $(SCRIPTDIR)/ExportFontDataGMS2.csx
