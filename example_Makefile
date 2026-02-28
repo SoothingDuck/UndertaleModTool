@@ -2,7 +2,7 @@ UNDERTALEMODTOOLDIR = $(HOME)/dev/gamemaker/UndertaleModTool
 UNDERTALEMODCLI = $(UNDERTALEMODTOOLDIR)/UndertaleModCli/bin/Release/net10.0/publish/UndertaleModCli
 SCRIPTDIR = $(UNDERTALEMODTOOLDIR)/UndertaleModTool/Scripts/GMS2-Export
 
-.PHONY: sprites font
+.PHONY: sprites font rooms objects
 
 all: font sprites
 
@@ -12,3 +12,8 @@ sprites:
 font:
 	$(UNDERTALEMODCLI) load data.win -s $(SCRIPTDIR)/ExportFontDataTowerDefense.csx
 
+room:
+	$(UNDERTALEMODCLI) load data.win -s $(SCRIPTDIR)/ExportRoomsTowerDefense.csx
+
+objects:
+	$(UNDERTALEMODCLI) load data.win -s $(SCRIPTDIR)/ExportGameObjectsTowerDefense.csx
