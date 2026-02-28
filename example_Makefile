@@ -3,4 +3,4 @@ UNDERTALEMODCLI = $(UNDERTALEMODTOOLDIR)/UndertaleModCli/bin/Release/net10.0/pub
 SCRIPTDIR = $(UNDERTALEMODTOOLDIR)/UndertaleModTool/Scripts/GMS2-Export
 
 font:
-	$(UNDERTALEMODCLI) load data.win -s $(SCRIPTDIR)/ExportFontDataGMS2.csx
+	$(UNDERTALEMODCLI) load data.win -s $(SCRIPTDIR)/ExportFontDataTowerDefense.csx
