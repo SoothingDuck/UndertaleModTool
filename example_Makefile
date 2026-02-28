@@ -4,6 +4,8 @@ SCRIPTDIR = $(UNDERTALEMODTOOLDIR)/UndertaleModTool/Scripts/GMS2-Export
 
 .PHONY: sprites font
 
+all: font sprites
+
 sprites:
 	$(UNDERTALEMODCLI) load data.win -s $(SCRIPTDIR)/ExportSpritesTowerDefense.csx
 
